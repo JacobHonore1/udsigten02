@@ -5,56 +5,44 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Boliger — Udsigten Haderslev</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700;800;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- NAV -->
 <header class="site-header" id="header">
-  <div class="container">
-    <div class="header-inner">
-      <a href="index.html" class="logo">
-        <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img" loading="lazy">
-      </a>
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html#vision">Vision</a>
-        <a href="index.html#projekt">Projektet</a>
-        <a href="index.html#nyheder">Nyheder</a>
-        <a href="boliger.html">Boliger</a>
-        <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
-      </nav>
-      <button class="nav-toggle" id="navToggle" aria-label="Menu">
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-        <span class="nav-toggle-bar"></span>
-      </button>
-    </div>
+  <div class="container header-inner">
+    <a href="index.html" class="logo">
+      <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img">
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html#vision">Vision</a>
+      <a href="index.html#sengetaarnet">Sengetårnet</a>
+      <a href="index.html#spa">Funktioner</a>
+      <a href="boliger.html">Boliger</a>
+      <a href="index.html#status">Status</a>
+      <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+      <span class="nav-toggle-bar"></span>
+    </button>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="fx fx-one"></div>
-  <div class="fx fx-two"></div>
-  <div class="fx fx-three"></div>
-  <div class="container">
-    <div class="card hero-card">
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <span class="kicker">Sengetårnet</span>
-          <h1>Boliger med udsigt<br>i <em>særklasse</em></h1>
-          <p class="hero-subline">Eksklusive lejligheder i det historiske Sengetårn</p>
-          <p class="hero-lead">Sengetårnet transformeres til moderne lejligheder med bevaret arkitektur og panoramaudsigt over Haderslev Dam. Find din lejlighed i oversigten nedenfor.</p>
-          <div class="hero-actions">
-            <a href="#oversigt" class="btn btn-primary">Se lejligheder</a>
-            <a href="index.html" class="btn btn-secondary">← Til forsiden</a>
-          </div>
-        </div>
-        <div class="hero-visual">
-          <img src="images/Boliger_Lejlighed_01.jpg" alt="Lejlighed i Sengetårnet med udsigt over Haderslev Dam">
-        </div>
-      </div>
+<section class="hero page-hero">
+  <img src="images/Boliger_Lejlighed_01.jpg" alt="Lejlighed i Sengetårnet med udsigt over Haderslev Dam" class="hero-bg">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <h1>BOLIGER MED<br>UDSIGT I SÆRKLASSE</h1>
+    <p class="hero-sub">Eksklusive lejligheder i det historiske Sengetårn</p>
+    <p class="hero-lead">Sengetårnet transformeres til moderne lejligheder med bevaret arkitektur og panoramaudsigt over Haderslev Dam. Find din lejlighed i oversigten nedenfor.</p>
+    <div class="hero-actions">
+      <a href="#oversigt" class="btn">Se lejligheder</a>
+      <a href="index.html" class="btn btn-outline">← Til forsiden</a>
     </div>
   </div>
 </section>
@@ -62,26 +50,20 @@
 <!-- OVERSIGT -->
 <section class="section" id="oversigt">
   <div class="container">
-    <div class="section-head reveal">
-      <span class="kicker">Oversigt</span>
-      <h2>Find din<br><em>lejlighed</em></h2>
-      <p>Oversigten opdateres løbende. Status, pris og størrelse vises pr. lejlighed — kontakt os for at booke en fremvisning eller høre mere om en konkret bolig.</p>
-    </div>
+    <h2 class="reveal">FIND DIN<br>LEJLIGHED</h2>
+    <p class="section-lead reveal">Oversigten opdateres løbende. Status, pris og størrelse vises pr. lejlighed — kontakt os for at booke en fremvisning eller høre mere om en konkret bolig.</p>
     <div class="lejlighed-status-msg" id="lejlighedStatusMsg" style="display:none;"></div>
     <div class="lejlighed-grid" id="lejlighedGrid"></div>
   </div>
 </section>
 
 <!-- PLANTEGNING / IMAGE MAP PRO -->
-<section class="section" id="plantegning">
+<section class="section imagemap-card" id="plantegning">
   <div class="container">
-    <div class="card imagemap-card reveal">
-      <span class="kicker">Plantegning</span>
-      <h2>Interaktiv<br><em>plantegning</em></h2>
-      <p>Klik dig rundt i Sengetårnet og se etager, lejlighedstyper og status direkte i plantegningen.</p>
-      <div class="imagemap-container" id="imagemap-container">
-        <span>Image Map Pro embed indsættes her</span>
-      </div>
+    <h2 class="reveal">INTERAKTIV<br>PLANTEGNING</h2>
+    <p class="reveal">Klik dig rundt i Sengetårnet og se etager, lejlighedstyper og status direkte i plantegningen.</p>
+    <div class="imagemap-container reveal" id="imagemap-container">
+      <span>Image Map Pro embed indsættes her</span>
     </div>
   </div>
 </section>
@@ -91,13 +73,14 @@
   <div class="container">
     <div class="footer-inner">
       <a href="index.html" class="logo">
-        <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img" loading="lazy">
+        <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img">
       </a>
       <nav class="footer-nav">
-        <a href="index.html#vision">Om projektet</a>
-        <a href="index.html#boliger">Boliger</a>
-        <a href="index.html#nyheder">Nyheder</a>
-        <a href="https://www.instagram.com/udsigten_haderslev/" target="_blank">Instagram</a>
+        <a href="index.html#vision">Vision</a>
+        <a href="index.html#sengetaarnet">Sengetårnet</a>
+        <a href="boliger.html">Boliger</a>
+        <a href="index.html#status">Status</a>
+        <a href="index.html#kontakt">Kontakt</a>
       </nav>
     </div>
     <p class="footer-copy">© 2026 Udsigten Haderslev ApS · Alle rettigheder forbeholdes</p>
@@ -125,6 +108,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
     if (el) {
       e.preventDefault();
       window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 80, behavior: 'smooth'});
+      document.getElementById('mainNav').classList.remove('open');
     }
   });
 });
