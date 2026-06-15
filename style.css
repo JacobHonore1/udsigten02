@@ -15,10 +15,13 @@
   --text:      #1a1410;
   --muted:     #6b6560;
   --accent:    #8B5E3C;
+  --color-boliger: #5B8A4A;
+  --color-hotel:   #C4A882;
+  --color-spa:     #5BB8D4;
   --line:      rgba(26, 20, 16, 0.10);
   --content-width: 1300px;
   --gutter:    clamp(24px, 4vw, 60px);
-  --section-pad: clamp(32px, 5vw, 60px);
+  --section-pad: clamp(16px, 2.5vw, 30px);
 }
 
 /* ========== BASE ========== */
@@ -62,6 +65,13 @@ h2 {
   padding-left: clamp(16px, 2vw, 26px);
   margin-bottom: 28px;
 }
+
+/* Sektionsfarver fra tværsnittet */
+#boliger h2 { border-left-color: var(--color-boliger); }
+#hotel h2,
+#restaurant h2 { border-left-color: var(--color-hotel); }
+#spa h2,
+#svommehal h2 { border-left-color: var(--color-spa); }
 
 h3 {
   font-size: clamp(1.2rem, 1.8vw, 1.5rem);
@@ -308,21 +318,27 @@ p {
 /* ========== SPLIT SEKTIONER (funktioner) ========== */
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 3fr 2fr;
   max-width: var(--content-width);
   margin: 0 auto;
   padding: var(--section-pad) var(--gutter);
 }
+.split-reverse {
+  grid-template-columns: 2fr 3fr;
+}
 .split-image {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
   min-height: 600px;
   height: 100%;
-  overflow: hidden;
-  border-radius: 8px;
 }
 .split-image img {
   width: 100%;
-  height: 100%;
+  flex: 1;
+  min-height: 0;
   object-fit: cover;
+  border-radius: 8px;
 }
 .split-text {
   display: flex;
@@ -333,6 +349,24 @@ p {
 .split-text p { margin-top: 18px; max-width: 480px; }
 .split-reverse .split-image { order: 2; }
 .split-reverse .split-text { order: 1; }
+
+/* ========== PLANTEGNINGER ========== */
+.plantegning-block { margin-top: 24px; }
+.split-image .plantegning-block { margin-top: 0; flex-shrink: 0; }
+.plantegning {
+  width: 100%;
+  object-fit: contain;
+  background: #f8f8f8;
+  padding: 24px;
+  border-radius: 4px;
+}
+.plantegning-caption {
+  font-size: 0.8rem;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 8px;
+  font-style: italic;
+}
 
 /* ========== BOLIGER GALLERY ========== */
 .gallery-grid {
