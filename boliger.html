@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Boliger — Udsigten Haderslev</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAV -->
+<header class="site-header" id="header">
+  <div class="container">
+    <div class="header-inner">
+      <a href="index.html" class="logo">
+        <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img" loading="lazy">
+      </a>
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html#vision">Vision</a>
+        <a href="index.html#projekt">Projektet</a>
+        <a href="index.html#nyheder">Nyheder</a>
+        <a href="boliger.html">Boliger</a>
+        <a href="index.html#kontakt" class="nav-cta">Kontakt</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="fx fx-one"></div>
+  <div class="fx fx-two"></div>
+  <div class="fx fx-three"></div>
+  <div class="container">
+    <div class="card hero-card">
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <span class="kicker">Sengetårnet</span>
+          <h1>Boliger med udsigt<br>i <em>særklasse</em></h1>
+          <p class="hero-subline">Eksklusive lejligheder i det historiske Sengetårn</p>
+          <p class="hero-lead">Sengetårnet transformeres til moderne lejligheder med bevaret arkitektur og panoramaudsigt over Haderslev Dam. Find din lejlighed i oversigten nedenfor.</p>
+          <div class="hero-actions">
+            <a href="#oversigt" class="btn btn-primary">Se lejligheder</a>
+            <a href="index.html" class="btn btn-secondary">← Til forsiden</a>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <img src="images/Boliger_Lejlighed_01.jpg" alt="Lejlighed i Sengetårnet med udsigt over Haderslev Dam">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OVERSIGT -->
+<section class="section" id="oversigt">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="kicker">Oversigt</span>
+      <h2>Find din<br><em>lejlighed</em></h2>
+      <p>Oversigten opdateres løbende. Status, pris og størrelse vises pr. lejlighed — kontakt os for at booke en fremvisning eller høre mere om en konkret bolig.</p>
+    </div>
+    <div class="lejlighed-status-msg" id="lejlighedStatusMsg" style="display:none;"></div>
+    <div class="lejlighed-grid" id="lejlighedGrid"></div>
+  </div>
+</section>
+
+<!-- PLANTEGNING / IMAGE MAP PRO -->
+<section class="section" id="plantegning">
+  <div class="container">
+    <div class="card imagemap-card reveal">
+      <span class="kicker">Plantegning</span>
+      <h2>Interaktiv<br><em>plantegning</em></h2>
+      <p>Klik dig rundt i Sengetårnet og se etager, lejlighedstyper og status direkte i plantegningen.</p>
+      <div class="imagemap-container" id="imagemap-container">
+        <span>Image Map Pro embed indsættes her</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+      <a href="index.html" class="logo">
+        <img src="images/UDSIGTEN_front_lightblue_04.png" alt="Udsigten Haderslev logo" class="logo-img" loading="lazy">
+      </a>
+      <nav class="footer-nav">
+        <a href="index.html#vision">Om projektet</a>
+        <a href="index.html#boliger">Boliger</a>
+        <a href="index.html#nyheder">Nyheder</a>
+        <a href="https://www.instagram.com/udsigten_haderslev/" target="_blank">Instagram</a>
+      </nav>
+    </div>
+    <p class="footer-copy">© 2026 Udsigten Haderslev ApS · Alle rettigheder forbeholdes</p>
+  </div>
+</footer>
+
+<script>
+// Nav scroll
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', scrollY > 50);
+}, {passive: true});
+
+// Mobile nav toggle
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('mainNav').classList.toggle('open');
+});
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const id = a.getAttribute('href');
+    if (id === '#') return;
+    const el = document.querySelector(id);
+    if (el) {
+      e.preventDefault();
+      window.scrollTo({top: el.getBoundingClientRect().top + scrollY - 80, behavior: 'smooth'});
+    }
+  });
+});
+
+// Reveal on scroll
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
+}, {threshold: 0.08});
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ===========================================
+// LEJLIGHEDSOVERSIGT — hentes fra OneDrive CSV
+// ===========================================
+
+// INDSÆT ONEDRIVE SHARE-LINK HER — skift til: Fil → Del → Kopier link → erstat med download-link
+const ONEDRIVE_CSV_URL = "https://onedrive.live.com/download?cid=PLACEHOLDER&resid=PLACEHOLDER&authkey=PLACEHOLDER";
+
+// Eksempel-lejligheder, vises hvis OneDrive-data ikke kan hentes
+const FALLBACK_LEJLIGHEDER = [
+  { nr: '101', etage: '1', stoerrelse: '78', vaerelser: '3', pris: '2.495.000', status: 'ledig' },
+  { nr: '204', etage: '2', stoerrelse: '95', vaerelser: '4', pris: '3.150.000', status: 'reserveret' },
+  { nr: '310', etage: '3', stoerrelse: '62', vaerelser: '2', pris: '1.975.000', status: 'solgt' },
+];
+
+function parseCSV(text) {
+  const lines = text.trim().split(/\r?\n/).filter(l => l.trim().length);
+  if (lines.length < 2) return [];
+
+  const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+  const col = (row, ...names) => {
+    for (const name of names) {
+      const i = headers.indexOf(name);
+      if (i !== -1) return (row[i] || '').trim();
+    }
+    return '';
+  };
+
+  return lines.slice(1).map(line => {
+    const row = line.split(',');
+    return {
+      nr: col(row, 'lejlighed', 'lejlighedsnummer', 'nr'),
+      etage: col(row, 'etage'),
+      stoerrelse: col(row, 'størrelse', 'storrelse', 'm2', 'størrelse m²'),
+      vaerelser: col(row, 'værelser', 'vaerelser'),
+      pris: col(row, 'pris'),
+      status: col(row, 'status').toLowerCase(),
+    };
+  }).filter(l => l.nr);
+}
+
+function statusInfo(status) {
+  if (status === 'ledig') return { className: 'status-ledig', label: 'Ledig' };
+  if (status === 'reserveret') return { className: 'status-reserveret', label: 'Reserveret' };
+  if (status === 'solgt') return { className: 'status-solgt', label: 'Solgt' };
+  return { className: 'status-ledig', label: status || 'Ukendt' };
+}
+
+function renderLejligheder(lejligheder) {
+  const grid = document.getElementById('lejlighedGrid');
+  grid.innerHTML = lejligheder.map(l => {
+    const s = statusInfo(l.status);
+    return `
+      <div class="lejlighed-card">
+        <div class="lejlighed-head">
+          <div>
+            <span class="lejlighed-nr">Lejlighed ${l.nr}</span>
+            <span class="lejlighed-etage">${l.etage}. etage</span>
+          </div>
+          <span class="lejlighed-status ${s.className}"><span class="status-dot"></span>${s.label}</span>
+        </div>
+        <div class="lejlighed-details">
+          <div>Størrelse<strong>${l.stoerrelse} m²</strong></div>
+          <div>Værelser<strong>${l.vaerelser}</strong></div>
+          <div>Pris<strong>${l.pris} kr.</strong></div>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function showStatusMsg(text) {
+  const msg = document.getElementById('lejlighedStatusMsg');
+  msg.textContent = text;
+  msg.style.display = 'block';
+}
+
+function loadLejligheder() {
+  fetch(ONEDRIVE_CSV_URL)
+    .then(res => {
+      if (!res.ok) throw new Error('Netværksfejl ved hentning af data');
+      return res.text();
+    })
+    .then(text => {
+      const lejligheder = parseCSV(text);
+      if (!lejligheder.length) throw new Error('Ingen lejligheder fundet i data');
+      renderLejligheder(lejligheder);
+    })
+    .catch(() => {
+      showStatusMsg('Kunne ikke hente live-data fra OneDrive lige nu — viser eksempel-lejligheder.');
+      renderLejligheder(FALLBACK_LEJLIGHEDER);
+    });
+}
+
+loadLejligheder();
+</script>
+</body>
+</html>

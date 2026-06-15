@@ -1,0 +1,22 @@
+name: Deploy to Simply.com
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Deploy via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: linux289.unoeuro.com
+          username: zaxis.dk
+          password: ${{ secrets.FTP_PASSWORD }}
+          server-dir: /public_html/udsigten01/
+          exclude: |
+            **/.git*
+            **/.git*/**
