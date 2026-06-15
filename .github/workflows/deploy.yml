@@ -16,7 +16,7 @@ jobs:
           server: linux289.unoeuro.com
           username: zaxis.dk
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/udsigten01/
+          server-dir: /public_html/udsigten02/
           exclude: |
             **/.git*
             **/.git*/**
