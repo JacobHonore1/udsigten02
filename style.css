@@ -1,6 +1,13 @@
+@font-face {
+  font-family: 'Palatino';
+  src: url('fonts/palr45w.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 /* ============================================
    UDSIGTEN HADERSLEV — 2026
-   Hvid baggrund · Playfair Display · Terracotta
+   Hvid baggrund · Palatino · Terracotta
    ============================================ */
 
 *, *::before, *::after {
@@ -58,7 +65,7 @@ ul { list-style: none; }
 
 /* ========== TYPOGRAPHY ========== */
 h1, h2, h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Palatino', serif;
   font-weight: 800;
   letter-spacing: -0.02em;
   line-height: 1.08;
@@ -175,7 +182,7 @@ p {
 }
 
 .logo-img {
-  height: 25px;
+  height: 33px;
   width: auto;
   display: block;
 }
@@ -373,6 +380,7 @@ p {
 .split {
   display: grid;
   grid-template-columns: 3fr 2fr;
+  gap: clamp(24px, 4vw, 60px);
   max-width: var(--content-width);
   margin: 0 auto;
   padding: var(--section-pad) var(--gutter);
@@ -400,7 +408,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: clamp(40px, 6vw, 100px);
+  padding: clamp(40px, 6vw, 100px) clamp(40px, 6vw, 100px) clamp(40px, 6vw, 100px) 0;
 }
 
 .split-text p {
@@ -595,7 +603,7 @@ p {
 
 .lejlighed-nr {
   display: block;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Palatino', serif;
   font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: -0.02em;
@@ -652,7 +660,7 @@ p {
 .lejlighed-details strong {
   display: block;
   margin-top: 4px;
-  font-family: 'Playfair Display', serif;
+  font-family: 'Palatino', serif;
   font-size: 1.05rem;
   font-weight: 800;
   letter-spacing: -0.01em;
