@@ -69,17 +69,20 @@ h1 { font-size: clamp(2.6rem, 8vw, 6rem); }
 
 h2 {
   font-size: clamp(2rem, 4.6vw, 3.6rem);
-  border-left: 4px solid var(--accent);
-  padding-left: clamp(16px, 2vw, 26px);
   margin-bottom: 28px;
 }
 
 /* Sektionsfarver fra tværsnittet */
-#boliger h2 { border-left-color: var(--color-boliger); }
-#hotel h2,
-#restaurant h2 { border-left-color: var(--color-hotel); }
-#spa h2,
-#svommehal h2 { border-left-color: var(--color-spa); }
+.section-block {
+  border-left: 8px solid var(--accent);
+  padding-left: 24px;
+}
+
+#boliger .section-block { border-left-color: var(--color-boliger); }
+#hotel .section-block,
+#restaurant .section-block { border-left-color: var(--color-hotel); }
+#spa .section-block,
+#svommehal .section-block { border-left-color: var(--color-spa); }
 
 h3 {
   font-size: clamp(1.2rem, 1.8vw, 1.5rem);
@@ -172,7 +175,7 @@ p {
 }
 
 .logo-img {
-  height: 36px;
+  height: 25px;
   width: auto;
   display: block;
 }
@@ -245,17 +248,9 @@ p {
 .hero-bg {
   display: block;
   width: 100%;
-  height: 75vh;
-  max-height: 75vh;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
   border-radius: 10px;
-}
-
-.hero-overlay {
-  position: absolute;
-  inset: 0 var(--gutter);
-  border-radius: 10px;
-  background: linear-gradient(to bottom, rgba(26, 20, 16, 0.15) 0%, rgba(26, 20, 16, 0.85) 55%, rgba(26, 20, 16, 0.92) 100%);
 }
 
 .hero-content {
