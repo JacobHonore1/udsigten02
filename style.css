@@ -295,6 +295,46 @@ p {
   margin-top: 32px;
 }
 
+/* ========== VISION PITCH BOX ========== */
+.vision-pitch {
+  background: var(--accent);
+  padding: 70px 0;
+}
+
+.vision-pitch-inner {
+  text-align: center;
+}
+
+.vision-pitch-logo-wrap {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 32px;
+}
+
+.vision-pitch-logo {
+  height: 48px;
+  width: auto;
+}
+
+.vision-pitch h2 {
+  color: #fff;
+  margin-bottom: 28px;
+}
+
+.vision-pitch p {
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 700px;
+  margin: 0 auto 20px;
+  font-size: clamp(1rem, 1.3vw, 1.15rem);
+}
+
+.vision-pitch p:last-child { margin-bottom: 0; }
+
+@media (max-width: 768px) {
+  .vision-pitch { padding: 48px 0; }
+  .vision-pitch-logo { height: 36px; }
+}
+
 /* ========== SECTION BASE ========== */
 .section { padding: var(--section-pad) 0; }
 

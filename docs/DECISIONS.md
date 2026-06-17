@@ -91,3 +91,16 @@ Tidlig implementering satte kun `border-left` på selve `<h2>`-elementet, hvilke
 Logo først reduceret 30% (misforståelse), derefter rettet til en forøgelse på 30% i forhold til oprindelig størrelse.
 
 **Status: logo er 30% større end basis-størrelsen, anvendt i både nav og footer.**
+
+## 12. VISION-boks sektion tilføjet mellem hero og funktionssektion
+
+Ny `<section class="vision-pitch">` indsat umiddelbart efter hero og før "EN NY BYDEL FOR ALLE"-sektionen. Indeholder præcis visionstekst fra pitchen, whitespace-logo øverst til højre, og centreret Palatino-overskrift "VISION".
+
+Designvalg:
+- Baggrundsfarve: `var(--accent)` (`#8B5E3C`) — genbruger eksisterende CSS-variabel, ingen hardcoded farve
+- Bredde: bruger `.container` (samme `max-width` og sidemargin som alle andre sektioner — IKKE kant-til-kant)
+- Ingen `border-radius` (skarpe hjørner, matcher designsystemet)
+- Kompakt højde: 70px top/bottom padding (48px på mobil) — ikke et dominerende hero-afsnit
+- Ingen `border-left` farvestreg på overskriften — denne sektion er centreret, ikke venstrestillet som de øvrige tekstblokke
+
+**Status: implementeret.**
