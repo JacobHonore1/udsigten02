@@ -78,6 +78,8 @@ Fire plantegninger eksporteret manuelt fra pitch-PDF'en og indsat i de matchende
 
 **Status: implementeret for disse fire. Flere illustrationer fra pitchen er endnu ikke brugt — se TODO.**
 
+Tværsnittet i sengetårnet-sektionen er desuden nu vist i et side-by-side layout med kategori-tekstblokke der er vandret alignet med de farvede lag i illustrationen (se punkt 13).
+
 ## 10. Vertikale farvestreger — strukturfejl rettet
 
 Tidlig implementering satte kun `border-left` på selve `<h2>`-elementet, hvilket fik linjen til kun at være lige så høj som overskriften — ikke hele tekstblokken under. Dette så ud som om linjen "stak ud" eller var for kort i forhold til afsnittet.
@@ -105,3 +107,19 @@ Designvalg:
 - Ingen `border-left` farvestreg på overskriften — denne sektion er centreret, ikke venstrestillet som de øvrige tekstblokke
 
 **Status: implementeret — fuld bredde, kompakt, symmetrisk spacing.**
+
+## 13. Kategori-tekstblokke alignet vandret med tværsnitsillustrationens farvelag
+
+Tværsnitsillustrationen (`Tværsnit_colors.png`) erstatter det tidligere `plantegning-block` i Sengetårnet-sektionen med et side-by-side layout (40% tekst / 60% billede). Kategori-tekstblokkene er placeret i en CSS grid-kolonne med rækker der matcher de visuelt målte proportioner i billedet:
+
+- `grid-template-rows: 7fr 37fr 20fr 10fr 26fr`
+  - 7fr: hvid sky/top
+  - 37fr: grønt lag (Boliger) — center ~25.5% fra top
+  - 20fr: beige lag (Hotel) — center ~54% fra top
+  - 10fr: blåt lag (Spa & Wellness) — center ~69% fra top
+  - 26fr: podium/fundament
+- Hver tekstblok centreres vertikalt inden for sin række (`align-items: center`)
+- Farvede `border-left: 8px solid` bruger eksisterende kategorifarver (--color-boliger, --color-hotel, --color-spa)
+- Mobilresponsivt: ved ≤980px falder layoutet til lodret stak (billede øverst, tekstblokke nedenunder i normal rækkefølge)
+
+**Status: implementeret.**

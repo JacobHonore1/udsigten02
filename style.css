@@ -412,6 +412,42 @@ p {
 
 .fact-col h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); }
 
+/* ========== TVÆRSNIT ALIGNED LAYOUT ========== */
+/* Text rows use the same proportions as the colored zones in the image:
+   top gap 7%, Boliger 37%, Hotel 20%, Spa 10%, bottom gap 26% */
+.tvaersnit-layout {
+  display: grid;
+  grid-template-columns: 2fr 3fr;
+  gap: clamp(24px, 4vw, 60px);
+  align-items: stretch;
+  margin-top: 32px;
+}
+
+.tvaersnit-image-col img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tvaersnit-text {
+  display: grid;
+  grid-template-rows: 7fr 37fr 20fr 10fr 26fr;
+}
+
+.tvaersnit-block {
+  display: flex;
+  align-items: center;
+}
+
+.category-line {
+  border-left: 8px solid;
+  padding-left: 24px;
+}
+
+.tvaersnit-boliger .category-line { border-left-color: var(--color-boliger); }
+.tvaersnit-hotel .category-line { border-left-color: var(--color-hotel); }
+.tvaersnit-spa .category-line { border-left-color: var(--color-spa); }
+
 .fullwidth-image {
   margin: var(--section-pad) auto 0;
   max-width: calc(var(--content-width) - 2 * var(--gutter));
@@ -771,6 +807,21 @@ p {
     border-left: none;
     border-top: 1px solid var(--line);
   }
+
+  .tvaersnit-layout {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .tvaersnit-image-col { order: -1; }
+
+  .tvaersnit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .tvaersnit-spacer { display: none; }
 
   .fact-col:first-child { border-top: none; }
 
