@@ -98,9 +98,10 @@ Ny `<section class="vision-pitch">` indsat umiddelbart efter hero og før "EN NY
 
 Designvalg:
 - Baggrundsfarve: `var(--accent)` (`#8B5E3C`) — genbruger eksisterende CSS-variabel, ingen hardcoded farve
-- Bredde: bruger `.container` (samme `max-width` og sidemargin som alle andre sektioner — IKKE kant-til-kant)
-- Ingen `border-radius` (skarpe hjørner, matcher designsystemet)
+- Bredde: baggrund og padding er placeret på `.container`-div'en (`.vision-pitch-inner`), ikke på den ydre `<section>` — så boksen følger nøjagtigt samme max-width og sidemargin som øvrigt indhold, med hvid baggrund synlig på begge sider
+- `margin-top: 70px` på ydre section (40px mobil) giver synligt hvidt mellemrum til hero-billedet
+- `border-radius: 14px` — bevidst undtagelse fra designsystemets ellers skarpe hjørner; gælder kun denne boks
 - Kompakt højde: 70px top/bottom padding (48px på mobil) — ikke et dominerende hero-afsnit
 - Ingen `border-left` farvestreg på overskriften — denne sektion er centreret, ikke venstrestillet som de øvrige tekstblokke
 
-**Status: implementeret.**
+**Status: implementeret og justeret (margin, runde hjørner, spacing).**

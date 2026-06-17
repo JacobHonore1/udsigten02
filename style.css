@@ -297,11 +297,13 @@ p {
 
 /* ========== VISION PITCH BOX ========== */
 .vision-pitch {
-  background: var(--accent);
-  padding: 70px 0;
+  margin-top: 70px;
 }
 
 .vision-pitch-inner {
+  padding: 70px var(--gutter);
+  background: var(--accent);
+  border-radius: 14px;
   text-align: center;
 }
 
@@ -331,7 +333,8 @@ p {
 .vision-pitch p:last-child { margin-bottom: 0; }
 
 @media (max-width: 768px) {
-  .vision-pitch { padding: 48px 0; }
+  .vision-pitch { margin-top: 40px; }
+  .vision-pitch-inner { padding: 48px var(--gutter); }
   .vision-pitch-logo { height: 36px; }
 }
 
