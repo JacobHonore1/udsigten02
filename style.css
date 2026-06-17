@@ -297,13 +297,14 @@ p {
 
 /* ========== VISION PITCH BOX ========== */
 .vision-pitch {
-  margin-top: 70px;
+  background: var(--accent);
+  border-radius: 14px;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  padding: 35px 0;
 }
 
 .vision-pitch-inner {
-  padding: 70px var(--gutter);
-  background: var(--accent);
-  border-radius: 14px;
   text-align: center;
 }
 
@@ -333,8 +334,7 @@ p {
 .vision-pitch p:last-child { margin-bottom: 0; }
 
 @media (max-width: 768px) {
-  .vision-pitch { margin-top: 40px; }
-  .vision-pitch-inner { padding: 48px var(--gutter); }
+  .vision-pitch { margin-top: 20px; margin-bottom: 20px; padding: 24px 0; }
   .vision-pitch-logo { height: 36px; }
 }
 
