@@ -98,7 +98,7 @@ Ny `<section class="vision-pitch">` indsat umiddelbart efter hero og før "EN NY
 
 Designvalg:
 - Baggrundsfarve: `var(--accent)` (`#8B5E3C`) — genbruger eksisterende CSS-variabel, ingen hardcoded farve
-- Bredde: fuld bredde (kant-til-kant med viewport) — baggrund og border-radius på ydre `<section>`, indhold centreret via `.container` indeni
+- Bredde: spejler præcis `.hero`-sektionens tilgang — ydre `<section class="vision-pitch">` har samme `max-width: var(--content-width); margin: auto; padding: 0 var(--gutter)` som `.hero`. Et indre `.vision-pitch-box`-div med `width: 100%` giver præcis samme visuelle bredde som hero-billedet. Root cause for tidligere fejl: baggrund på fuld-viewport `<section>` uden max-width gav ikke hero-alignment; baggrund på `.container` gav bredde inkl. gutter i stedet for section-indhold.
 - `margin-top: 35px` og `margin-bottom: 35px` (20px mobil) giver symmetrisk hvidt mellemrum til hero og næste sektion
 - `border-radius: 14px` — bevidst undtagelse fra designsystemets ellers skarpe hjørner; gælder kun denne boks
 - Kompakt højde: 35px top/bottom padding (24px mobil)
