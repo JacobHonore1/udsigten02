@@ -305,7 +305,7 @@ p {
 
 /* Inner box: width:100% of section content = same visual width as .hero-bg */
 .vision-pitch-box {
-  background: var(--accent);
+  background: #7A3300;
   border-radius: 14px;
   padding: 35px var(--gutter);
 }
