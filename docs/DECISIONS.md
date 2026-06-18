@@ -197,3 +197,29 @@ På desktop var hero-billedet tilstrækkeligt højt til at den synlige del under
 `.facts-grid`-elementet (tre kolonner med Boliger/Hotel/Spa & Wellness uden farvestreger, hvid afrundet boks) var en rest fra et tidligere layout-stadium og eksisterede parallelt med den farvekodede `tvaersnit-layout`-version af samme indhold. Fjernet fra HTML og alle tilhørende CSS-regler slettet (`.facts-grid`, `.fact-col`, responsive overrides) da klasserne ingen steder else bruges.
 
 Den farvekodede version (8px `border-left`-streger, serif overskrifter, desktop/mobil split via `tvaersnit-desktop-img`/`tvaersnit-layout`) er den endelige, og forbliver uændret.
+
+## 21. Ny menu-struktur
+
+Navigationsmenuen (hoved + footer) opdateret til ny rækkefølge og navne:
+
+1. Vision → `#vision` (anker nu på `<section class="vision-pitch">` — vision-pitch-boksen; `id="bydel"` på "EN NY BYDEL"-sektionen)
+2. Boliger → `boliger.html`
+3. Spa & Wellness → `#spa`
+4. Hotel & Restaurant → `#hotel`
+5. Svømmehal → `#svommehal` (sektionen eksisterede allerede — ingen placeholder nødvendig)
+6. Kontakt → `#kontakt` (styled som nav-cta)
+
+Fjernede: Udsigtstårnet, Funktioner, Status som synlige nav-punkter.
+
+## 22. Visuel signup-boks i hero
+
+Pille-formet email signup-boks tilføjet i **nederste højre hjørne** af hero-sektionen (`position: absolute; bottom; right`).
+
+- Semi-transparent hvid baggrund: `rgba(255,255,255,0.85)` med `backdrop-filter: blur(6px)`
+- Cirkulært hus-ikon (SVG line-style) i lys cirkel `rgba(26,20,16,0.06)` til venstre
+- `<input type="email">` med placeholder "Bliv skrevet op til en bolig!" — ren visuel, ingen backend
+- Placeholder opacity: `rgba(26,20,16,0.45)`
+- Bredde: `min(320px, ...)` — maks 320px på desktop
+- Mobil (<768px): centreret i bunden (`left: 50%; transform: translateX(-50%)`)
+
+**Ingen backend/funktionalitet endnu** — formularen har ingen submit-handler.
