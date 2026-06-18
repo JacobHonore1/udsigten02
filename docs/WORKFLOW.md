@@ -46,3 +46,11 @@ En god prompt fra denne chat til Claude Code er:
 ## Hvad denne dokumentation IKKE er
 
 Den erstatter ikke visuel verifikation. CSS-ændringer kan se korrekte ud i kode og stadig fejle visuelt (forkert beregnet bredde, overlap, forkert specificitet). Skærmbilleder efter hver større ændring er stadig nødvendige — dokumentationen reducerer kun risikoen for at gentage allerede afviste retninger eller løse samme problem to gange.
+
+## Hvordan giv feedback på et screenshot
+
+For hurtigst muligt at få den rigtige rettelse første gang, inkludér i feedbacken:
+1. **Hvad** skal ændres (vær specifik: "bredden" kan betyde flere ting — er det viewport-bredde,
+   afstand til andre elementer, eller indholds-max-width?)
+2. **Hvad** skal IKKE ændres (så det ikke utilsigtet rulles tilbage)
+3. **Hvilken enhed**: desktop, mobil, eller begge

@@ -161,3 +161,21 @@ Mobil (<768px): viser det originale `Tværsnit_colors.png` (uden tekst) øverst,
 Implementeret med to separate HTML-elementer (`.tvaersnit-desktop-img` og `.tvaersnit-layout`) og CSS `display: none/flex` via media query.
 
 **Status: implementeret.**
+
+## Pitch-PDF side-mapping
+
+Reference: `docs/reference/Udsigten_Haderslev_2404.pdf`
+
+| PDF side | Indhold | Brugt på sitet |
+|---|---|---|
+| 1 | Hero-billede + titel | Hero-sektion (index.html) |
+| 2 | Vision-tekst | Vision-boks-sektion |
+| 3 | "En ny bydel for alle" + funktionsliste | Funktioner-sektion |
+| 5 | Tværsnit sengetårn med kategori-farver | SENGETÅRNET-sektion (desktop: Tvaersnit_med_tekst.png) |
+| 7 | Etageplan svømmehal/fitness/erhverv | Ikke brugt endnu |
+| 17-22 | Hotel | Hotel-sektion |
+| 23-30 | Boliger/Town Houses/Lejligheder | Boliger-sektion |
+| 34 | Lokalplankort, E45, afstande | Ikke brugt endnu |
+| 35 | Status og næste skridt | Status-sektion |
+
+(Udfyld resterende sider efter behov når nyt indhold fra pitchen tages i brug.)
