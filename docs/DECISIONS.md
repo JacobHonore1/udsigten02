@@ -123,3 +123,29 @@ Tværsnitsillustrationen (`Tværsnit_colors.png`) erstatter det tidligere `plant
 - Mobilresponsivt: ved ≤980px falder layoutet til lodret stak (billede øverst, tekstblokke nedenunder i normal rækkefølge)
 
 **Status: implementeret.**
+
+## 14. Hero-tekst: sort + øverste venstre hjørne
+
+Hero-teksten ("UDSIGTEN HADERSLEV" + "En ny bydel") flyttes fra bunden til øverste venstre hjørne af billedet, og farven ændres fra hvid til mørk tekst (`var(--text)` / `var(--muted)`).
+
+Årsag: billedets øverste del er lyseblå himmel med hvide skyer — mørkere tekst er mere læsbar og matcher pitchens stil bedre end hvid tekst foran lys baggrund. `right`-constraint fjernes så teksten er venstrestillet uden kunstig bredde-begrænsning.
+
+CSS: `.hero-content` bruger nu `top: clamp(24px, 4vw, 48px)` i stedet for `bottom`, `color: var(--text)`. Ingen tekst-skygge nødvendig.
+
+**Status: implementeret.**
+
+## 15. "G"-rendering-fejl rettet: font-weight normal
+
+`h1, h2, h3` brugte `font-weight: 800`, men `palr45w.ttf` er kun indlæst som `font-weight: normal`. Browseren syntetiserede fed ved at tegne glyphen dobbelt med en kunstig streg, hvilket gav en synlig ring/outline rundt om "G" i "SENGETÅRNET".
+
+Fix: `font-weight: 800` → `font-weight: normal` på `h1, h2, h3`. Palatino Regular har allerede de rigtige serif-detaljer uden syntetisering.
+
+**Status: implementeret. Husk: tilføjes der nye font-weights, skal de også deklareres i `@font-face`.**
+
+## 16. Tværsnit-sektion: billede kun på desktop, split på mobil
+
+Desktop viser udelukkende tværsnitsillustration — `.tvaersnit-text` er skjult (`display: none`) og `.tvaersnit-layout` er `display: block`. Tekst-kolonnens indhold (Boliger/Hotel/Spa) gentages allerede i fact-grid ovenfor, så der er ingen informationstab.
+
+Mobil (≤980px): layout skifter til flex-kolonne, billede vises øverst (`order: -1` på image-col), derefter tekstblokke med farvede kategoristreger nedenunder. Spacers er skjult.
+
+**Status: implementeret.**
