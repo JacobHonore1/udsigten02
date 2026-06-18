@@ -191,3 +191,9 @@ På desktop var hero-billedet tilstrækkeligt højt til at den synlige del under
 ## 19. Hero-overskrift font-size reduceret 50%
 
 `UDSIGTEN HADERSLEV`-overskriften havde global `h1`-størrelse (`clamp(2.6rem, 8vw, 6rem)`). Reduceret til 50% ved at tilføje en specifik override på `.hero-content h1`: `font-size: clamp(1.3rem, 4vw, 3rem)`. Gælder alle skærmstørrelser. Undertitlen "En ny bydel" (`hero-sub`) ændres ikke.
+
+## 20. Dubleret tre-kolonne tekstboks fjernet fra SENGETÅRNET-sektion
+
+`.facts-grid`-elementet (tre kolonner med Boliger/Hotel/Spa & Wellness uden farvestreger, hvid afrundet boks) var en rest fra et tidligere layout-stadium og eksisterede parallelt med den farvekodede `tvaersnit-layout`-version af samme indhold. Fjernet fra HTML og alle tilhørende CSS-regler slettet (`.facts-grid`, `.fact-col`, responsive overrides) da klasserne ingen steder else bruges.
+
+Den farvekodede version (8px `border-left`-streger, serif overskrifter, desktop/mobil split via `tvaersnit-desktop-img`/`tvaersnit-layout`) er den endelige, og forbliver uændret.

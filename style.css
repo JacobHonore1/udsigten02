@@ -393,25 +393,6 @@ p {
   object-fit: cover;
 }
 
-/* ========== SENGETÅRNET ========== */
-.facts-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  margin-top: 32px;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  overflow: hidden;
-}
-
-.fact-col {
-  padding: clamp(28px, 4vw, 48px) clamp(24px, 3vw, 44px);
-  border-left: 1px solid var(--line);
-}
-
-.fact-col:first-child { border-left: none; }
-
-.fact-col h3 { font-size: clamp(1.2rem, 1.8vw, 1.5rem); }
-
 /* ========== TVÆRSNIT ALIGNED LAYOUT ========== */
 /* Text rows use the same proportions as the colored zones in the image:
    top gap 7%, Boliger 37%, Hotel 20%, Spa 10%, bottom gap 26% */
@@ -806,15 +787,6 @@ p {
   }
 
   .split-reverse .split-text { order: 2; }
-
-  .facts-grid { grid-template-columns: 1fr; }
-
-  .fact-col {
-    border-left: none;
-    border-top: 1px solid var(--line);
-  }
-
-  .fact-col:first-child { border-top: none; }
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
 }
