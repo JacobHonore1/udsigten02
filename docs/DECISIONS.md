@@ -179,3 +179,15 @@ Reference: `docs/reference/Udsigten_Haderslev_2404.pdf`
 | 35 | Status og næste skridt | Status-sektion |
 
 (Udfyld resterende sider efter behov når nyt indhold fra pitchen tages i brug.)
+
+## 18. Hero-tekst usynlig på mobil — root cause og fix
+
+**Root cause:** `.site-header` er `position: fixed; top: 0; z-index: 999` med `padding: 22px 0` og logo på 100px → header er 144px høj. `body` har ingen `padding-top` og `.hero` havde ingen `margin-top`, så hero-sektionen begyndte ved y=0 i dokumentet — direkte bag navigationen. `.hero-content` med `top: clamp(24px, 4vw, 48px)` lå i viewport-koordinat y=24-48, altså fuldt dækket af den hvide nav-bjælke.
+
+På desktop var hero-billedet tilstrækkeligt højt til at den synlige del under navbaren stadig gav et godt helhedsindtryk. På mobil var billedet proportionalt kortere (landscape-ratio på smal skærm = lille højde), og teksten var komplet skjult bag navbaren.
+
+**Fix:** `margin: 148px auto 0` på `.hero` — skubber hero-sektionen 148px ned i dokumentet, så billede og tekst starter 4px under navbarens bundkant (144px header + 4px buffer). Ren hvid mellemzone er usynlig da side-baggrund og nav-baggrund begge er hvide.
+
+## 19. Hero-overskrift font-size reduceret 50%
+
+`UDSIGTEN HADERSLEV`-overskriften havde global `h1`-størrelse (`clamp(2.6rem, 8vw, 6rem)`). Reduceret til 50% ved at tilføje en specifik override på `.hero-content h1`: `font-size: clamp(1.3rem, 4vw, 3rem)`. Gælder alle skærmstørrelser. Undertitlen "En ny bydel" (`hero-sub`) ændres ikke.
