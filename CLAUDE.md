@@ -91,4 +91,17 @@ Se `docs/WORKFLOW.md` for den fulde arbejdsgang fra prompt til live site.
 
 - `docs/DECISIONS.md` — log nye designvalg her når de bliver truffet, særligt hvis de ændrer eller overskriver tidligere valg
 - `docs/TODO.md` — opdater når opgaver løses eller nye opstår
+- `docs/DESIGN_TOKENS.md` — opdater hvis CSS-variabler ændres i `:root`
 - Denne fil (`CLAUDE.md`) — opdater designsystem-sektionen hvis farver, fonte eller layout-regler ændres permanent
+
+## Definition of done — visuelle/layout-ændringer
+
+Efter ENHVER ændring der påvirker bredde, margin, padding, spacing eller positionering:
+
+1. Angiv i dit svar de konkrete numeriske værdier du har sat (i px eller %), ikke kun "justeret bredden".
+   Eksempel: "Sektionen har nu max-width: 1200px, margin: 0 auto, padding: 80px 0" — ikke "gjort smallere".
+2. Hvis ændringen skal matche et andet element på siden (f.eks. "samme bredde som hero"), bekræft
+   eksplicit at du har sammenlignet de faktiske CSS-værdier for begge elementer, ikke kun antaget det.
+3. Ved tvivl om hvad "bredde" eller "afstand" refererer til (fuld viewport-bredde vs. indholds-max-width
+   vs. afstand mellem elementer), stop og spørg om præcisering i stedet for at gætte.
+4. Vis den ændrede CSS-regel direkte i dit svar (kort code snippet), ikke kun en bekræftelse at det er gjort.
