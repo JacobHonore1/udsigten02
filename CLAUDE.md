@@ -21,9 +21,9 @@ Designet er bygget direkte på kundens egen pitch-præsentation (`Udsigten_Hader
 - Generel accent/streg: `#8B5E3C` (terracotta/brun)
 
 **Farver — kategorispecifikke** (fra tværsnitdiagrammet i pitchen, side 5):
-- Boliger: `#5B8A4A` (grøn)
-- Hotel & Café/Restaurant: `#C4A882` (varm sand/beige)
-- Spa & Wellness, Svømmehal: `#5BB8D4` (lyseblå)
+- Boliger: `#859B77` (dæmpet sage-grøn, målt fra pitch-PDF)
+- Hotel & Café/Restaurant: `#B88360` (varm orange-brun, målt fra pitch-PDF)
+- Spa & Wellness, Svømmehal: `#8CD6F6` (lys himmelblå, målt fra pitch-PDF)
 - Vision og generelle sektioner uden kategori: behold `#8B5E3C`
 
 Disse farver bruges som `border-left` på de vertikale streger ved overskrifter i de relevante sektioner — ikke vilkårligt, kun hvor indholdet faktisk hører til den kategori.

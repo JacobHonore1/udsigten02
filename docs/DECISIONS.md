@@ -61,9 +61,11 @@ Brugeren uploadede en licenseret Palatino Roman TTF-fil (`palr45w.ttf`) og bad o
 
 Pitchens tværsnit-illustration af sengetårnet (side 5) bruger farvekodning: grøn til boliger, sand/beige til hotel, blå til spa/svømmehal. Disse præcise farver er overført til sitets sektionsoverskrifter som `border-left`-accent, så hver sektions overskrift visuelt matcher kundens egen materialefarvekode:
 
-- Boliger: `#5B8A4A`
-- Hotel/Restaurant: `#C4A882`
-- Spa/Wellness/Svømmehal: `#5BB8D4`
+- Boliger: `#859B77` (RGB 133, 155, 119 — dæmpet sage-grøn)
+- Hotel/Restaurant: `#B88360` (RGB 184, 131, 96 — varm orange-brun)
+- Spa/Wellness/Svømmehal: `#8CD6F6` (RGB 140, 214, 246 — lys himmelblå)
+
+De originale værdier (`#5B8A4A`, `#C4A882`, `#5BB8D4`) var visuelt estimerede og er nu rettet til farver målt direkte fra pitch-PDF'ens kildemateriale (side 5).
 
 **Status: implementeret.** Generelle/ukategoriserede sektioner (Vision, Status, Kontakt) bruger fortsat den neutrale `#8B5E3C`.
 
