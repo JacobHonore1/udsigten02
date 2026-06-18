@@ -414,9 +414,19 @@ p {
 /* ========== TVÆRSNIT ALIGNED LAYOUT ========== */
 /* Text rows use the same proportions as the colored zones in the image:
    top gap 7%, Boliger 37%, Hotel 20%, Spa 10%, bottom gap 26% */
-.tvaersnit-layout {
+.tvaersnit-desktop-img {
   display: block;
   margin-top: 32px;
+}
+
+.tvaersnit-desktop-img img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tvaersnit-layout {
+  display: none;
 }
 
 .tvaersnit-image-col img {
@@ -803,22 +813,6 @@ p {
     border-top: 1px solid var(--line);
   }
 
-  .tvaersnit-layout {
-    display: flex;
-    flex-direction: column;
-    gap: clamp(24px, 4vw, 60px);
-  }
-
-  .tvaersnit-image-col { order: -1; }
-
-  .tvaersnit-text {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .tvaersnit-spacer { display: none; }
-
   .fact-col:first-child { border-top: none; }
 
   .gallery-grid { grid-template-columns: repeat(2, 1fr); }
@@ -849,6 +843,20 @@ p {
   .gallery-item { height: 280px; }
   .lejlighed-grid { grid-template-columns: 1fr; }
   .lejlighed-details { grid-template-columns: repeat(3, 1fr); }
+
+  .tvaersnit-desktop-img { display: none; }
+
+  .tvaersnit-layout {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, 4vw, 60px);
+  }
+
+  .tvaersnit-text {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

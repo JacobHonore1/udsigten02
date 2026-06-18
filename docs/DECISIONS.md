@@ -150,4 +150,14 @@ Desktop viser udelukkende tværsnitsillustration — `.tvaersnit-text` er skjult
 
 Mobil (≤980px): layout skifter til flex-kolonne, billede vises øverst (`order: -1` på image-col), derefter tekstblokke med farvede kategoristreger nedenunder. Spacers er skjult.
 
+**Status: implementeret — se punkt 17 for opdateret implementering.**
+
+## 17. SENGETÅRNET tværsnit: separat desktop- og mobilbillede
+
+Desktop (≥768px): viser `Tvaersnit_med_tekst.png` — bygningstegning med tekst og farvestreger allerede indlejret i billedet. `.tvaersnit-layout`-containeren (med HTML-tekstblokke) er skjult.
+
+Mobil (<768px): viser det originale `Tværsnit_colors.png` (uden tekst) øverst, derefter HTML-tekstblokke med Boliger/Hotel/Spa & Wellness og 8px farvede `border-left`-streger nedenunder. Breakpoint er 768px (ikke 980px som de øvrige responsive regler).
+
+Implementeret med to separate HTML-elementer (`.tvaersnit-desktop-img` og `.tvaersnit-layout`) og CSS `display: none/flex` via media query.
+
 **Status: implementeret.**
