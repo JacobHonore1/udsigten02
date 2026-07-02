@@ -349,6 +349,16 @@ Eneste tilbageværende ændring: `.hero-signup-input::placeholder` har fået `fo
 
 **Status: implementeret.**
 
+## 34. Mobilbillede i Sengetårnet-sektionen skiftet til Tværsnit_colors.jpg
+
+I `.tvaersnit-layout` (mobilversionen af Sengetårnet-sektionen — jf. kodekommentaren "Mobil: originalt billede øverst, kategoritekstblokke nedenunder") er billedreferencen skiftet fra `images/Tvaersnit_med_tekst.png` til `images/Tv%C3%A6rsnit_colors.jpg`. Filnavnet indeholder det danske bogstav æ, som er percent-kodet (`%C3%A6`, UTF-8) i `src`-attributten for at sikre korrekt indlæsning på tværs af browsere og på Simply-hostingen.
+
+`.tvaersnit-desktop-img` (desktopversionen) er **uændret** og bruger fortsat `images/Tvaersnit_med_tekst.png`.
+
+**Status: implementeret.**
+
+**Status: implementeret.**
+
 **Status: implementeret.**
 
 **Status: implementeret.**
