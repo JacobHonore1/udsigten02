@@ -286,3 +286,14 @@ Punkt 26's to tilføjelser matchede ikke pitch-præsentationens præsentationsst
   - `.gallery-grid`/`.gallery-item`-CSS-klasserne er **ikke** fjernet fra `style.css` — de er en generel designsystem-komponent (fandtes allerede i Boliger-sektionen før punkt 26) og kan genbruges senere; de er blot ikke længere i brug nogen steder lige nu.
 
 **Status: implementeret.**
+
+## 28. Svømmehal-sektion: skitse fjernet, hovedbillede og etageplan byttet om
+
+To rettelser til billedrækkefølgen i Svømmehal-sektionen (`id="svommehal"`):
+
+- **Skitse-billedet fjernet helt.** `mere-end-en-svommehal.jpg` (håndtegnet skitse af bygningen) er fjernet fra sin `.fullwidth-image`-div og optræder ikke længere nogen steder på siden. Selve filen ligger fortsat i `images/` (ubrugte billeder ryddes ikke automatisk, jf. oprydningspunktet i `docs/TODO.md`).
+- **Hovedbillede og etageplan byttet om.** Split-sektionens billede (ved siden af "SVØMME HAL"-overskriften) var `svommehal-spa-wellness-fitness.jpg` (etageplan) — det er nu `fra-standard-svommehal-til-destination_3.jpg` (poolbillede med udsigt gennem panoramavinduer). Etageplanen er flyttet ned og indsat som første `.fullwidth-image` i billedrækken under split-sektionen, så den ikke længere er hovedbilledet.
+
+Ny rækkefølge i sektionen: split-billede (`fra-standard..._3.jpg`) → `svommehal-spa-wellness-fitness.jpg` → `fra-standard..._1.jpg` → `fra-standard..._2.jpeg` → `fra-standard..._4.jpg`. `_3.jpg` optræder kun i split-sektionen, ikke længere også i fuldbredde-rækken.
+
+**Status: implementeret.**
