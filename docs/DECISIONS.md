@@ -357,6 +357,10 @@ I `.tvaersnit-layout` (mobilversionen af Sengetårnet-sektionen — jf. kodekomm
 
 **Status: implementeret.**
 
+## 35. Forkert hero-billede i mobilversion rettet
+
+`<picture>`-elementets `<source media="(max-width: 767px)">` i hero-sektionen pegede fejlagtigt på `images/Side 1_frontpage_cover.jpg` — rettet til `images/Side 1_frontpage_cover_construction.jpg`. Desktop-fallback'et (`<img>`) er uændret og bruger fortsat `Side 1_frontpage_cover.jpg`, som stadig er i aktiv brug dér, så filen/referencen er ikke fjernet.
+
 **Status: implementeret.**
 
 **Status: implementeret.**
