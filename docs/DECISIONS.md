@@ -306,6 +306,16 @@ Ny rækkefølge i sektionen: split-billede (`fra-standard..._3.jpg`) → `svomme
 
 **Detaljeret etageplan fjernet.** `hotelvaerelser_01.png` (den detaljerede plantegning med rum markeret Linned, Elevator, Skakt, Personale, Hovedtrappe, Hotel Lounge) og det omkringliggende `.fullwidth-image`-element er fjernet fra Hotel-sektionen. Hotel-sektionens fuldbredde-billedrække består nu kun af `hotel02.jpg`.
 
+**Status: implementeret — men se punkt 30, som flytter etageplanen ud af `.split-image` og gør `.split-image .plantegning`-specificitetsfixet herover irrelevant (koden er fjernet igen).**
+
+## 30. Etageplanen flyttet ud af split-sektionen — matcher bredden af billedet nedenunder
+
+Etageplanen (`Hotel etage_Floorplan.png`) sad i `.plantegning-block` inde i `.split-image`, hvor den kun fik 60% af sidens indholdsbredde (den delte kolonne med hotel-fotoet). Brugeren ville have den lige så bred som `hotel02.jpg` — det fuldbrede billede i sektionen nedenunder.
+
+**Løsning:** `.plantegning-block` er flyttet ud af `.split-image` og placeret som et selvstændigt element i samme `<section class="section">` som `hotel02.jpg`s `.fullwidth-image`, lige efter det. `.plantegning-block` fik sin egen bredde-formel, identisk med `.fullwidth-image`s: `margin: var(--section-pad) auto 0; max-width: calc(var(--content-width) - 2 * var(--gutter));` — samme centrering og samme maks-bredde som ethvert fuldbredt billede i designsystemet, uden `.fullwidth-image`s faste højde/`object-fit: cover` (som ville beskære den brede, korte etageplan-fil). Da `.container` allerede giver Boliger-sektionens `.plantegning-block` samme effektive bredde, er ændringen bagudkompatibel dér — ingen visuel ændring for Boliger.
+
+Da ingen `.plantegning`-billede længere er nestet i `.split-image` noget sted på sitet, er de dedikerede overrides fra punkt 29 (`.split-image .plantegning-block`, `.split-image .plantegning`) fjernet igen som død kode.
+
 **Status: implementeret.**
 
 **Status: implementeret.**
