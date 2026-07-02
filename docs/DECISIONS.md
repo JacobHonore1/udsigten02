@@ -339,6 +339,14 @@ Boksen med "Bliv skrevet op til en bolig!" i hero-sektionen virkede for gennemsi
 - **Mere markant ikon:** Hus-ikonets SVG øget fra `18×18` til `22×22`, den omkringliggende cirkel (`.hero-signup-icon`) fra `40×40` til `46×46`. Ikonets farve (`color`, arves af `stroke="currentColor"`) skiftet fra `var(--text)` (gråsort) til `var(--accent)` (terracotta `#8B5E3C`).
 - **Større boks:** `.hero-signup`s `padding` øget fra `6px` til `10px`, `gap: 10px` tilføjet mellem ikon/input/knap (nødvendigt for det nye tredje element), og maks-bredden øget fra `min(320px, ...)` til `min(440px, ...)` for at give plads til den større tekst og den nye knap.
 
+**Status: FORLADT, se punkt 33 — brugeren afviste resultatet og bad om at rulle helt tilbage.**
+
+## 33. Hero-tilmeldingsboks: punkt 32 rullet helt tilbage, placeholder-tekst gjort fed i stedet
+
+Punkt 32's ændringer (større boks, solid baggrund, ny "Tilmeld"-knap, større/terracotta-ikon) blev afvist af brugeren efter visuel gennemgang. Hele diffen fra punkt 32 er rullet tilbage i både `index.html` og `style.css` — `.hero-signup`, `.hero-signup-icon`, `.hero-signup-input` og hero-signup-HTML'en (ikon-SVG, input, ingen knap) er nu byte-for-byte identiske med tilstanden før punkt 32.
+
+Eneste tilbageværende ændring: `.hero-signup-input::placeholder` har fået `font-weight: 700` tilføjet, så placeholder-teksten "Bliv skrevet op til en bolig!" vises fed — uden at røre størrelse, baggrund, ikon eller boksdimensioner.
+
 **Status: implementeret.**
 
 **Status: implementeret.**
