@@ -329,4 +329,18 @@ To rettelser i `index.html`:
 
 **Status: implementeret.**
 
+## 32. Hero-tilmeldingsboks gjort mere synlig
+
+Boksen med "Bliv skrevet op til en bolig!" i hero-sektionen virkede for gennemsigtig og med for lille tekst. Fem justeringer af `.hero-signup` og relaterede klasser:
+
+- **Større tekst:** `.hero-signup-input`s `font-size` øget fra `0.82rem` (~13px) til `19px`.
+- **Mere solid baggrund:** `background` øget fra `rgba(255,255,255,0.85)` til `rgba(255,255,255,0.97)` — fremstår nu som en næsten helt hvid, solid boks. `box-shadow` skærpet fra `0 4px 20px rgba(26,20,16,0.10)` til `0 8px 28px rgba(26,20,16,0.18)` for tydeligere adskillelse fra baggrundsbilledet.
+- **Ny "Tilmeld"-knap:** `<button type="button" class="btn">Tilmeld</button>` tilføjet efter input-feltet, genbruger sidens eksisterende `.btn`-stil uændret (samme mørke baggrund/hover som fx den tidligere "Se alle boliger"-knap). Ingen submit-funktionalitet endnu — kun visuel.
+- **Mere markant ikon:** Hus-ikonets SVG øget fra `18×18` til `22×22`, den omkringliggende cirkel (`.hero-signup-icon`) fra `40×40` til `46×46`. Ikonets farve (`color`, arves af `stroke="currentColor"`) skiftet fra `var(--text)` (gråsort) til `var(--accent)` (terracotta `#8B5E3C`).
+- **Større boks:** `.hero-signup`s `padding` øget fra `6px` til `10px`, `gap: 10px` tilføjet mellem ikon/input/knap (nødvendigt for det nye tredje element), og maks-bredden øget fra `min(320px, ...)` til `min(440px, ...)` for at give plads til den større tekst og den nye knap.
+
+**Status: implementeret.**
+
+**Status: implementeret.**
+
 **Status: implementeret.**

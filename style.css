@@ -302,25 +302,26 @@ p {
   right: calc(var(--gutter) + clamp(16px, 2vw, 24px));
   display: flex;
   align-items: center;
-  background: rgba(255, 255, 255, 0.85);
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.97);
   backdrop-filter: blur(6px);
   -webkit-backdrop-filter: blur(6px);
   border-radius: 50px;
-  padding: 6px;
-  box-shadow: 0 4px 20px rgba(26, 20, 16, 0.10);
-  width: min(320px, calc(100% - 2 * (var(--gutter) + clamp(16px, 2vw, 24px))));
+  padding: 10px;
+  box-shadow: 0 8px 28px rgba(26, 20, 16, 0.18);
+  width: min(440px, calc(100% - 2 * (var(--gutter) + clamp(16px, 2vw, 24px))));
 }
 
 .hero-signup-icon {
-  width: 40px;
-  height: 40px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: rgba(26, 20, 16, 0.06);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  color: var(--text);
+  color: var(--accent);
 }
 
 .hero-signup-input {
@@ -328,7 +329,7 @@ p {
   border: none;
   background: transparent;
   font-family: 'Inter', sans-serif;
-  font-size: 0.82rem;
+  font-size: 19px;
   color: var(--text);
   padding: 0 14px;
   outline: none;
@@ -337,6 +338,10 @@ p {
 
 .hero-signup-input::placeholder {
   color: rgba(26, 20, 16, 0.45);
+}
+
+.hero-signup .btn {
+  flex-shrink: 0;
 }
 
 /* ========== VISION PITCH BOX ========== */
