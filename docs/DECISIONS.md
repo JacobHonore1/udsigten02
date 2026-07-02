@@ -297,3 +297,15 @@ To rettelser til billedrækkefølgen i Svømmehal-sektionen (`id="svommehal"`):
 Ny rækkefølge i sektionen: split-billede (`fra-standard..._3.jpg`) → `svommehal-spa-wellness-fitness.jpg` → `fra-standard..._1.jpg` → `fra-standard..._2.jpeg` → `fra-standard..._4.jpg`. `_3.jpg` optræder kun i split-sektionen, ikke længere også i fuldbredde-rækken.
 
 **Status: implementeret.**
+
+## 29. Hotel-sektion: etageplan skaleret rigtigt op, detaljeret etageplan fjernet
+
+**Root cause fundet og rettet:** `.split-image img` (specificitet 0-1-1) havde højere specificitet end `.plantegning` (0-1-0), så når en `.plantegning`-etageplan lå nestet i en `.split-image`-kolonne (Hotel-sektionens tilfælde), overskrev `.split-image img` stille og roligt `.plantegning`s `object-fit: contain` med `object-fit: cover` og `border-radius: 4px` med `8px` — uden at det var synligt i koden, kun i cascaden. Rettet ved at tilføje en dedikeret regel `.split-image .plantegning` (specificitet 0-2-0, vinder over `.split-image img`) der eksplicit sætter `width: 100%; height: auto; object-fit: contain; border-radius: 4px;`. `.plantegning` og `.plantegning-block` fik desuden eksplicit `width: 100%; max-width: 100%; height: auto; display: block;` for at garantere fuld boksbredde uden beskæring eller forvrængning, uanset kontekst.
+
+`Hotel etage_Floorplan.png` er selv en meget bred/kort banner-formet fil (2890×522px, ca. 5,5:1) — med `object-fit: contain` og fuld boksbredde skalerer den nu proportionelt korrekt op til hele `.plantegning-block`s bredde uden beskæring.
+
+**Detaljeret etageplan fjernet.** `hotelvaerelser_01.png` (den detaljerede plantegning med rum markeret Linned, Elevator, Skakt, Personale, Hovedtrappe, Hotel Lounge) og det omkringliggende `.fullwidth-image`-element er fjernet fra Hotel-sektionen. Hotel-sektionens fuldbredde-billedrække består nu kun af `hotel02.jpg`.
+
+**Status: implementeret.**
+
+**Status: implementeret.**
