@@ -318,4 +318,15 @@ Da ingen `.plantegning`-billede længere er nestet i `.split-image` noget sted p
 
 **Status: implementeret.**
 
+## 31. "Se alle boliger"-knap fjernet, Boliger-menupunkt peger nu internt
+
+To rettelser i `index.html`:
+
+- **"SE ALLE BOLIGER"-knappen fjernet.** `<a href="boliger.html" class="btn reveal">Se alle boliger →</a>` — hele elementet, ikke kun teksten — er fjernet fra Boliger-sektionen, lige efter plantegningsboksen.
+- **Boliger-menupunktet peger nu internt.** Både i main nav og footer nav pegede "Boliger" på `boliger.html`. Ændret til `href="#boliger"` begge steder, så det scroller til Boliger-sektionen på `index.html` i stedet. Sektionen havde allerede `id="boliger"` på `<section>`-taget, så ingen HTML-ændring var nødvendig der.
+
+`boliger.html` som selvstændig side er ikke slettet eller ændret — den er blot ikke længere linket fra hoved- eller footer-navigationen.
+
+**Status: implementeret.**
+
 **Status: implementeret.**
