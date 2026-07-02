@@ -223,3 +223,52 @@ Pille-formet email signup-boks tilføjet i **nederste højre hjørne** af hero-s
 - Mobil (<768px): centreret i bunden (`left: 50%; transform: translateX(-50%)`)
 
 **Ingen backend/funktionalitet endnu** — formularen har ingen submit-handler.
+
+## 23. Farvede sektionsbokse (skillerum) før hovedafsnit
+
+Fuldbredde (= content-width, spejler hero/vision-boks) farvede bokse indsat som visuelt "pusterum" før hvert hovedafsnit — inspireret af pitchens Vision-side. Fire bokse:
+
+- Før `#spa` → blå (`.divider-spa`), "SPA & WELLNESS"
+- Før `#svommehal` → blå (`.divider-spa`), "SVØMMEHAL"
+- Før `#hotel` → sand (`.divider-hotel`), "HOTEL & RESTAURANT"
+- Før `#boliger` → grøn (`.divider-boliger`), "BOLIGER"
+
+Designvalg:
+- Overskrift: Palatino, store bogstaver, hvid. Undertekst: én linje, `rgba(255,255,255,0.9)`
+- Baggrund = kategorifarve-variablerne (`--color-spa/hotel/boliger`) — samme kilde som farvestregerne, så farverne aldrig kan divergere
+- Hård, lige kant: solid farve, ingen gradient, ingen buet clip-path (bevidst udskudt til senere)
+- `border-radius: 14px` som vision-boksen (punkt 12); ellers skarpe hjørner i designsystemet
+- Kompakt højde via `padding: clamp(32px, 4.5vw, 56px)`
+
+**Status: implementeret.** Bemærk: to blå bokse (Spa + Svømmehal) står i samme farve men adskilt af Spa-sektionens indhold.
+
+## 24. Farvekonsistens bekræftet — prompt-estimater afvist til fordel for pitch-målte farver
+
+En prompt bad om at sætte kategorifarverne til `#5B8A4A` / `#C4A882` / `#5BB8D4`. Dette er præcis de estimerede værdier, som punkt 8 tidligere bevidst forkastede til fordel for de pitch-målte `#859B77` / `#B88360` / `#8CD6F6`. Konflikten blev forelagt brugeren, som **valgte at beholde de pitch-målte farver**.
+
+Konsekvens: CSS-variablerne er uændrede. De nye sektionsbokse og alle eksisterende 8px-farvestreger trækker begge på de samme variabler og er dermed konsistente på tværs af sitet. Prompt sektion 4's foreslåede hexværdier blev ikke implementeret.
+
+**Status: farvekonsistens bekræftet — én kilde (`:root`-variabler) for både streger og bokse.**
+
+## 25. "Status og næste skridt"-sektion — allerede etableret
+
+Prompt bad om en ny to-spaltet status-sektion før footeren (jf. pitch side 35). Sektionen (`<section class="section status" id="status">`) fandtes allerede med korrekt struktur: overskrift "STATUS OG NÆSTE SKRIDT" med farvestreg (neutral `--accent`, jf. reglen for ukategoriserede sektioner), to-spaltet `.status-grid` med `.status-list`-punkter. Indholdet er foreløbigt/generisk og kan udskiftes når konkret tekst modtages. Ingen strukturændring nødvendig.
+
+**Status: bekræftet på plads — kun indhold mangler.**
+
+## 26. Alle billeder udskiftet med nye fra images_new — matcher pitchens rækkefølge
+
+Alle billedreferencer på sitet (`index.html`, `boliger.html`) erstattet med 27 nye billeder fra `images_new/`, i den rækkefølge pitch-præsentationen definerer:
+
+- **Hero** (index.html): udvidet fra ét statisk billede til et 4-billeders crossfade-slideshow (`UDSIGTEN HADERSLEV EN NY BYDEL_01/02/03` + `Altan view`) — ren CSS-animation (`@keyframes`, ingen JS), `.hero-slideshow` med `aspect-ratio: 16/9` da de absolut positionerede billeder ikke længere selv sætter containerens højde.
+- **En ny bydel for alle**: 1:1 udskiftning.
+- **Sengetårnet transformeres**: både desktop- og mobil-tværsnitsbilledet peger nu på samme nye fil (`sengetaarnet-transformeres.png`), da mappingen kun angav ét billede for sektionen. Den nederste fullwidth-udsigt (`View_West.jpg`) er ikke dækket af den nye mapping og forblev uændret.
+- **Spa & Wellness, Svømmehal, Hotel**: hver sektions split-billede udskiftet med det første mappede billede; ekstra billeder ud over det ene split-slot tilføjet som `.gallery-grid` (samme klasse som Boliger-sektionen allerede brugte) lige under split-sektionen — Svømmehal fik 5 ekstra (Mere end en svømmehal + fire "Fra standard..."), Spa fik 2 ekstra, Hotel fik 2 ekstra.
+- **Restaurant**: split-billede udskiftet med `hotel-cafe-restaurant.png`.
+- **Boliger**: gallery udvidet fra 3 til 6 billeder (fire Town Houses + to Lejligheder). `boliger.html`s hero-billede skiftet til `lejligheder_02.png` (ikke eksplicit dækket af mappingen — valgt fordi siden handler om lejligheder).
+- **Status og næste skridt**: sektionen havde intet billede før — tilføjet som `.fullwidth-image` (samme mønster som Sengetårnet-sektionen) efter status-listerne.
+- **Afsluttende billede**: ny `<section>` med `.fullwidth-image` indsat mellem Status og Kontakt, med `udsigten-haderslev-en-ny-bydel.png`.
+
+**Omdøbte filer:** Alle 27 filer fra `images_new/` blev flyttet til `images/` og omdøbt til rene, URL-venlige navne (små bogstaver, bindestreger, ingen mellemrum/æøå/`&`) — fx `SVØMMEHAL SPA & WELLNESS FITNESS.png` → `svommehal-spa-wellness-fitness.png`. Årsag: mellemrum, danske bogstaver og `&` i filnavne er risikable i URL-stier ved FTP-deploy til Simply, og `images_new/` som separat mappe blev vurderet unødvendig ved siden af den eksisterende `images/`-struktur. `images_new/`-mappen er fjernet efter flytningen.
+
+**Status: implementeret.**

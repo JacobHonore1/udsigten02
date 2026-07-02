@@ -23,6 +23,10 @@ Følgende illustrationer findes i `Udsigten_Haderslev_2404 (2).pdf` men er ikke 
 - [ ] De vertikale farvestreger (border-left) er strukturelt rettet (se DECISIONS.md punkt 10), men skal tjekkes visuelt efter enhver ny sektion eller indholdsændring — let at få linjen til at "smutte" igen ved fremtidige redigeringer
 - [ ] Ingen formel "design QA"-runde er kørt endnu for mobilversionen — alt arbejde indtil videre er vurderet på desktop-bredde
 
+## Oprydning
+
+- [ ] Flere billeder i `images/` er ikke længere referenceret efter billedudskiftningen (se DECISIONS.md punkt 26): `Side 1_frontpage_cover_lake.jpg`, `Side2_Drone view_final_8K.jpg`, `Tvaersnit_med_tekst.png`, `Tværsnit_colors.png`, `Spa01_infinity_Spa1.jpg`, `Svoemmehal01.jpg`, `Hotel Recption03.jpg`, `NEW_restaurent.jpg`, `Fitness01.jpg`, `Boliger_Lejlighed_01.jpg`. Ikke slettet endnu — bekræft med kunden at de nye billeder er godkendt, før de gamle filer fjernes.
+
 ## Infrastruktur
 
 - [ ] Ingen custom domæne sat op specifikt for udsigten02 — kører på `zaxis.dk/udsigten02` via Simply mappestruktur, hvilket virker, men er ikke et "rigtigt" eget domæne
