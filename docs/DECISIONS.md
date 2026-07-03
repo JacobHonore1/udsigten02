@@ -363,6 +363,16 @@ I `.tvaersnit-layout` (mobilversionen af Sengetårnet-sektionen — jf. kodekomm
 
 **Status: implementeret.**
 
+## 36. Mobilmargener ensrettet, defensiv scrollbar-fix, hero-tilmeldingsboks får sidepadding
+
+**Root cause for uens margener fundet:** `.fullwidth-image` (bruges til alle enkeltstående fuldbrede billeder — Sengetårnet, Svømmehal, Spa, Hotel, Boliger, Status, afsluttende billede) havde kun `max-width: calc(var(--content-width) - 2 * var(--gutter))` og `margin: auto`, uden en selvstændig `width`. `max-width` giver kun sidemargin når skærmen er BREDERE end indholdsbredden — på alle skærme smallere end det (dvs. reelt alt under ca. 1350px, herunder al mobil) sad billederne derfor kant-til-kant med 0 margin, mens `.split`-sektioner (Hotel, Restaurant, Svømmehal, Spa, Boliger-tekst) allerede havde korrekt sidemargin via deres egen `padding: var(--section-pad) var(--gutter)`. Samme fejl gjaldt `.plantegning-block`, når den står selvstændigt (Hotel-etageplanen).
+
+**Fix:** Tilføjet `width: calc(100% - 2 * var(--gutter))` til `.fullwidth-image`, så den altid har mindst `--gutter` (min. 24px) luft i hver side, uanset skærmbredde — samme sidemargin som `.split`-sektionerne nu på tværs af alle sektioner. For `.plantegning-block` er samme bredde-regel tilføjet target­eret via `.section > .plantegning-block`, så kun den selvstændige brug (Hotel) rammes — Boliger-brugen (nestet i `.container`, som allerede har sin egen gutter-padding) er uændret og undgår dermed dobbelt indrykning.
+
+**Scrollbar:** Gennemgik hele `style.css` og begge HTML-filer for `overflow: auto/scroll` og faste højder — fandt ingen. De eneste `overflow`-regler i kodebasen er tre `overflow: hidden` (billedbeskæring i `.vision-image`, `.fullwidth-image`, `.gallery-item`), som klipper indhold og ikke kan producere en synlig scrollbar. Der er derfor ikke identificeret en indlejret scroll-container i koden — den rapporterede indre scrollbar kan skyldes en visnings-artefakt i mobil-emulering (fx Chrome DevTools' enhedsværktøj), ikke selve sidens kode. Som forsigtighedsforanstaltning er `overflow-x: hidden` tilføjet på både `html` og `body`, så et evt. fremtidigt vandret overflow ikke kan skabe en uventet scrollbar.
+
+**Hero-tilmeldingsboks:** I mobil-medieforespørgslen (`max-width: 768px`) er `.hero-signup`s bredde ændret fra `calc(100% - 2 * var(--gutter))` til `calc(100% - 2 * var(--gutter) - 10px)` — 5px ekstra luft i hver side, så boksen ikke rører skærmkanten.
+
 **Status: implementeret.**
 
 **Status: implementeret.**
