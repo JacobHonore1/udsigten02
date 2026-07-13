@@ -921,9 +921,17 @@ p {
     height: 50px;
   }
 
+  .hero {
+    margin: 98px auto 0; /* clears fixed mobile header (22px top-padding + 50px logo + 22px bottom-padding = 94px) + 4px buffer */
+  }
+
   .hero-content {
     top: 20%;
     text-shadow: 0 2px 10px rgba(255, 255, 255, 0.55);
+  }
+
+  .hero-sub {
+    display: none;
   }
 
   .main-nav {
@@ -970,6 +978,10 @@ p {
     left: 50%;
     transform: translateX(-50%);
     width: calc(100% - 2 * var(--gutter) - 10px);
+  }
+
+  .hero-signup-input {
+    font-size: 0.72rem;
   }
 }
 

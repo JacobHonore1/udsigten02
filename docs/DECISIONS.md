@@ -412,3 +412,13 @@ Efter flere runder af (forgæves) fejlsøgning omkring caching, breakpoints og d
 **Fix:** Mellemrummet i `srcset`-værdien er procent-kodet: `srcset="images/Side%201_frontpage_cover_mobile.jpg"`. Punkt 38's tidligere begrundelse om at bevare rå mellemrum "for konsistens" var forkert for denne specifikke attribut — konsistensen gælder kun for `src`, ikke `srcset`. Gennemgået resten af filen: der er kun ét `<source>`-element i `index.html`, så ingen andre steder er ramt af samme fejl.
 
 **Status: implementeret.**
+
+## 41. Mobil: mindre placeholder-tekst, undertekst skjult, mindre afstand til topmenu
+
+Tre yderligere mobil-only rettelser, alle tilføjet i eksisterende `@media (max-width: 768px)` i `style.css` — desktop uændret.
+
+- **Placeholder-tekst mindre:** `.hero-signup-input`s `font-size` sat til `0.72rem` (~11.5px) på mobil, ned fra basisværdien `0.95rem` (~15.2px, punkt 39), så hele sætningen "Bliv skrevet op til en bolig!" kan stå på én linje uden at blive skåret af i den smallere mobil-boks. Gælder både placeholder og indtastet tekst, da de deler samme `font-size`-regel.
+- **"En ny bydel" skjult på mobil:** `.hero-sub` sat til `display: none` i mobil-media-query. Undertekstlinjen under "UDSIGTEN HADERSLEV" vises dermed ikke længere hen over hero-billedet på mobil. Desktop-visningen af `.hero-sub` er uændret.
+- **Afstand til topmenu reduceret:** `.hero`s `margin` (base `148px auto 0`, beregnet til at rydde den faste desktop-header på 144px + 4px buffer) overskrives på mobil til `margin: 98px auto 0`. Værdien matcher den nye mobil-header-højde efter punkt 38's logo-formindskelse: `22px` top-padding + `50px` logo + `22px` bund-padding = `94px`, plus samme `4px` buffer-konvention som desktop-værdien. Uden denne override brugte mobil stadig desktop's `148px`, hvilket gav et unødvendigt gab på `148 − 98 = 50px` mellem header og hero-billede.
+
+**Status: implementeret.**
