@@ -397,4 +397,10 @@ Tre rettelser, alle inden for eksisterende `@media (max-width: 768px)` i `style.
   - Ny mobil-specifik regel: `.hero-content { top: 20%; text-shadow: 0 2px 10px rgba(255,255,255,0.55); }` — erstatter (overskriver) desktop-clampen kun under 768px. 20% placerer tekstblokken i en zone med bedre kontrast end toppen, med god margin (mindst ~5–9 procentpoint) til bygningskanten selv på de smalleste mobilbredder, hvor tekstblokken (to linjer + margin) fylder mest relativt til billedhøjden.
   - Et let hvidt text-shadow er tilføjet som ekstra kontrastsikring, da den beregnede kontrast ved 20% (~3.5–3.8) stadig er i underkanten for den mindre `hero-sub`-tekst. Ingen ændring af tekstfarven selv — `var(--text)` bevares som besluttet i punkt 14.
 
+## 39. Hero-tilmeldingsfelt: tekststørrelse øget
+
+Brugeren godkendte den interaktive tilmeldingsboks (placeholder-skift + send-ikon, punkt 37), men fandt teksten i selve inputfeltet for lille. `.hero-signup-input`s `font-size` øget fra `0.82rem` (~13.1px) til `0.95rem` (~15.2px). Kun font-size ændret — boksens padding, bredde, ikonstørrelser og placeholder-fed-vægt (punkt 33) er uændrede.
+
+**Status: implementeret.**
+
 **Status: implementeret.**
