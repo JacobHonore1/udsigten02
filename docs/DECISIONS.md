@@ -422,3 +422,17 @@ Tre yderligere mobil-only rettelser, alle tilføjet i eksisterende `@media (max-
 - **Afstand til topmenu reduceret:** `.hero`s `margin` (base `148px auto 0`, beregnet til at rydde den faste desktop-header på 144px + 4px buffer) overskrives på mobil til `margin: 98px auto 0`. Værdien matcher den nye mobil-header-højde efter punkt 38's logo-formindskelse: `22px` top-padding + `50px` logo + `22px` bund-padding = `94px`, plus samme `4px` buffer-konvention som desktop-værdien. Uden denne override brugte mobil stadig desktop's `148px`, hvilket gav et unødvendigt gab på `148 − 98 = 50px` mellem header og hero-billede.
 
 **Status: implementeret.**
+
+## 42. Mobil: "UDSIGTEN HADERSLEV" centreret og næsten fuld bredde
+
+Brugeren bad specifikt om at denne ændring **kun** skal gælde mobilversionen (bekræftet eksplicit) — desktop beholder sin venstrestillede placering fra punkt 14.
+
+`.hero-content` i `@media (max-width: 768px)` ændret fra den nedarvede venstrestillede `left`-værdi til:
+```css
+left: calc(var(--gutter) + 24px);
+right: calc(var(--gutter) + 24px);
+text-align: center;
+```
+`left`/`right` for et absolut positioneret element beregnes fra kanten af `.hero`s *padding-box*, ikke fra billedets faktiske kant — og `.hero` har selv `padding: 0 var(--gutter)`, som er det, der reelt indrykker billedet. Derfor er den ekstra ønskede 24px lagt oveni `var(--gutter)` (ikke i stedet for), så teksten reelt sidder 24px inden for billedets venstre og højre kant, ikke 24px inden for `.hero`-elementets yderkant. `.hero-sub` var allerede skjult på mobil (punkt 41), så kun `<h1>UDSIGTEN HADERSLEV</h1>` er tilbage til at blive centreret — ingen ændring af font-size, kun placering og alignment.
+
+**Status: implementeret.**
