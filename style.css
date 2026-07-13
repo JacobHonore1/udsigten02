@@ -917,6 +917,15 @@ p {
 }
 
 @media (max-width: 768px) {
+  .logo-img {
+    height: 50px;
+  }
+
+  .hero-content {
+    top: 20%;
+    text-shadow: 0 2px 10px rgba(255, 255, 255, 0.55);
+  }
+
   .main-nav {
     display: none;
     flex-direction: column;

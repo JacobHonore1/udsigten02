@@ -386,3 +386,15 @@ Tilføjet interaktiv adfærd til hero tilmeldingsfelt: placeholder skifter til "
 - **CSS:** `.hero-signup-send` mirrorer `.hero-signup-icon`s dimensioner (`40×40`, cirkulær) men bruger `var(--accent)`-baggrund og hvidt ikon, placeret i højre side. Skjult som standard (`width: 0; opacity: 0`), animeres ind via `transition` på `width`/`opacity`/`transform`/`margin-left` — intet hårdt layout-spring når den vises/skjules.
 
 **Status: implementeret. Fortsat ingen rigtig backend — kun console.log og visuel bekræftelse.**
+
+## 38. Mobil: mindre logo, nyt hero-billede, hero-tekst flyttet ned i himmelzonen
+
+Tre rettelser, alle inden for eksisterende `@media (max-width: 768px)` i `style.css` — desktop uændret.
+
+- **Logo 50% mindre:** `.logo-img` (base `height: 100px`) får `height: 50px` i mobil-media-query.
+- **Nyt mobil hero-billede:** `<source media="(max-width: 767px)">` i hero-`<picture>` peger nu på `images/Side 1_frontpage_cover_mobile.jpg` (bekræftet at filen findes i `images/`) i stedet for `Side 1_frontpage_cover_construction.jpg`. Filnavnet indeholder mellemrum, som er efterladt urekodet (rå space), samme konvention som de øvrige hero-billedreferencer i samme `<picture>`-element (fx `Side 1_frontpage_cover.jpg`), som allerede fungerer sådan i produktion.
+- **Hero-tekstens placering rettet efter pixel-analyse af det nye billede:** `Side 1_frontpage_cover_mobile.jpg` er kvadratisk (1254×1254px). Direkte pixel-sampling af filen viste at bygningens tagkant (venstre del af billedet, hvor teksten sidder) starter ved ca. 48–52% af billedhøjden — himlen er ren og fri for forhindringer hele vejen ned til der. Men den øverste del af himlen (hvor `.hero-content`s oprindelige `top: clamp(24px, 4vw, 48px)` placerede teksten) er en meget mørkere, mættet blå (RGB ~(0,80,155)), som giver en beregnet WCAG-kontrastratio på kun ~2.2–3.0 mod tekstfarven `var(--text)` (#1a1410) — under AA-grænsen (4.5:1). Længere nede (ca. 30–40% af billedhøjden) er himlen markant lysere (kontrastratio 4.6–6.9).
+  - Ny mobil-specifik regel: `.hero-content { top: 20%; text-shadow: 0 2px 10px rgba(255,255,255,0.55); }` — erstatter (overskriver) desktop-clampen kun under 768px. 20% placerer tekstblokken i en zone med bedre kontrast end toppen, med god margin (mindst ~5–9 procentpoint) til bygningskanten selv på de smalleste mobilbredder, hvor tekstblokken (to linjer + margin) fylder mest relativt til billedhøjden.
+  - Et let hvidt text-shadow er tilføjet som ekstra kontrastsikring, da den beregnede kontrast ved 20% (~3.5–3.8) stadig er i underkanten for den mindre `hero-sub`-tekst. Ingen ændring af tekstfarven selv — `var(--text)` bevares som besluttet i punkt 14.
+
+**Status: implementeret.**
