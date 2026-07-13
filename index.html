@@ -49,7 +49,7 @@
         <polyline points="9 22 9 12 15 12 15 22"/>
       </svg>
     </div>
-    <input type="email" id="heroSignupInput" class="hero-signup-input" placeholder="Bliv skrevet op til en bolig!" data-default-placeholder="Bliv skrevet op til en bolig!" data-focus-placeholder="Indtast din e-mail" data-success-placeholder="Tak, vi skriver dig op!">
+    <input type="email" id="heroSignupInput" class="hero-signup-input" placeholder="Bliv skrevet op til en bolig!" data-default-placeholder="Bliv skrevet op til en bolig!" data-focus-placeholder="Indtast din e-mail" data-success-placeholder="Tak, vi skriver dig op!" data-error-placeholder="Der skete en fejl, prøv igen">
     <button type="button" class="hero-signup-send" id="heroSignupSend" aria-label="Tilmeld">
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <line x1="22" y1="2" x2="11" y2="13"/>
@@ -386,10 +386,29 @@ heroSignupInput.addEventListener('input', heroSignupUpdateSendState);
 
 heroSignupSend.addEventListener('click', () => {
   if (!heroSignupIsValidEmail()) return;
-  console.log('Hero signup email:', heroSignupInput.value.trim());
-  heroSignupInput.value = '';
-  heroSignupInput.placeholder = heroSignupInput.dataset.successPlaceholder;
-  heroSignupUpdateSendState();
+  const email = heroSignupInput.value.trim();
+  heroSignupInput.disabled = true;
+  heroSignupSend.disabled = true;
+
+  fetch('subscribe.php', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    body: 'email=' + encodeURIComponent(email)
+  })
+    .then(res => res.json())
+    .then(data => {
+      heroSignupInput.value = '';
+      heroSignupInput.placeholder = data.success ? heroSignupInput.dataset.successPlaceholder : heroSignupInput.dataset.errorPlaceholder;
+    })
+    .catch(() => {
+      heroSignupInput.value = '';
+      heroSignupInput.placeholder = heroSignupInput.dataset.errorPlaceholder;
+    })
+    .finally(() => {
+      heroSignupInput.disabled = false;
+      heroSignupSend.disabled = false;
+      heroSignupUpdateSendState();
+    });
 });
 
 // Kontaktformular

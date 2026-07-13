@@ -452,3 +452,15 @@ Ny mobil-specifik regel:
 Samme clamp-værdi som base-`h2` (og dermed VISION-overskriften), så de to altid beregner præcis samme størrelse ved enhver mobil viewport-bredde, i stedet for et fast tal der kun ville matche ved én specifik bredde. Tjekket op imod sky-placeringen fra punkt 38/40: selv med den større skrift og deraf 2-linjers ombrydning ved smalle bredder holder tekstblokken sig stadig inden for himmelzonen (`top: 20%`) med mindst ~5 procentpoints margin til bygningskanten.
 
 **Status: implementeret.**
+
+## 44. Hero-tilmeldingsfelt sender nu rigtig e-mail via PHP-backend
+
+Punkt 37 gav feltet klient-side interaktivitet (placeholder-skift, send-ikon), men klik gjorde reelt intet ud over `console.log` — ingen e-mail blev nogensinde sendt. Brugeren bad om at et rigtigt klik faktisk sender en e-mail til tre modtagere: `info@udsigten.dk`, `epl@seguro.dk` og `jh@zaxis.dk`.
+
+**Valgt løsning (bekræftet med brugeren mellem to muligheder):** et lille PHP-script (`subscribe.php`) i repo-roden, fremfor en tredjeparts formular-tjeneste (Web3Forms/Formspree). Kræver at Simply-hostingen understøtter PHP — ikke eksplicit bekræftet fra denne session, da der ikke er nogen måde at teste PHP-eksekvering på serveren herfra (statisk FTP-deploy, ingen CI-test af selve hostingmiljøet). Hvis siden viser scriptets rå PHP-kildekode i browseren i stedet for at eksekvere det, understøtter hostingen ikke PHP, og en anden løsning (tredjeparts formular-tjeneste) skal bruges i stedet.
+
+- **`subscribe.php`:** Tager imod POST med et `email`-felt, validerer med `filter_var(..., FILTER_VALIDATE_EMAIL)`, og sender med PHP's indbyggede `mail()` til alle tre modtagere (komma-separeret i `$to`, understøttet direkte af `mail()`). `Reply-To`-header sættes til den indtastede e-mail, så en besvarelse går direkte til den interesserede. Returnerer JSON (`{success: true/false}`) så frontend kan vise korrekt status. Afviser ikke-POST-requests (405) og ugyldige e-mails (400).
+- **`index.html`:** `heroSignupSend`s klik-handler erstattet — i stedet for kun `console.log`, sendes nu et `fetch('subscribe.php', {method: 'POST', ...})`-kald med e-mailen som `application/x-www-form-urlencoded` body. Input og send-knap deaktiveres (`disabled = true`) mens requesten er undervejs, for at undgå dobbelt-indsendelse. Ved succes vises `data-success-placeholder` ("Tak, vi skriver dig op!"), ved fejl (enten netværksfejl eller `success: false` fra serveren) vises en ny `data-error-placeholder` ("Der skete en fejl, prøv igen").
+- **Ingen ændring af Kontakt-sektionens formular** — den har fortsat kun en visuel `console.log`-fri "Sendt ✓"-tekstændring uden reel afsendelse (uden for scope for denne opgave).
+
+**Status: implementeret, men IKKE verificeret live** — kræver et faktisk test-signup på den deployede side for at bekræfte at Simply-hostingen understøtter PHP og at `mail()` rent faktisk leverer til alle tre indbakker (herunder tjek af spam-mapper, da PHP `mail()` uden SPF/DKIM-opsætning på afsenderdomænet kan blive markeret som spam).

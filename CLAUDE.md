@@ -69,6 +69,7 @@ Der er flere illustrationer i pitchen (situationsplan, arkitektskitser, town hou
 - `boliger.html` — boligunderside med dynamiske lejlighedskort, planlagt live-data fra OneDrive/Excel og fremtidig Image Map Pro-integration
 - `style.css` — al styling, ingen inline styles ud over undtagelser markeret i koden
 - `fonts/palr45w.ttf` — Palatino custom font
+- `subscribe.php` — backend-endpoint (kræver PHP-understøttelse hos Simply) der modtager POST fra hero-tilmeldingsfeltet og sender e-mail til info@udsigten.dk, epl@seguro.dk og jh@zaxis.dk. Se `docs/DECISIONS.md` punkt 44.
 
 ## Infrastruktur og deploy
 
