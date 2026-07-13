@@ -436,3 +436,19 @@ text-align: center;
 `left`/`right` for et absolut positioneret element beregnes fra kanten af `.hero`s *padding-box*, ikke fra billedets faktiske kant — og `.hero` har selv `padding: 0 var(--gutter)`, som er det, der reelt indrykker billedet. Derfor er den ekstra ønskede 24px lagt oveni `var(--gutter)` (ikke i stedet for), så teksten reelt sidder 24px inden for billedets venstre og højre kant, ikke 24px inden for `.hero`-elementets yderkant. `.hero-sub` var allerede skjult på mobil (punkt 41), så kun `<h1>UDSIGTEN HADERSLEV</h1>` er tilbage til at blive centreret — ingen ændring af font-size, kun placering og alignment.
 
 **Status: implementeret.**
+
+## 43. Mobil: "UDSIGTEN HADERSLEV" samme font-størrelse som "VISION"
+
+Bekræftet med brugeren at ændringen **kun** skal gælde mobil — desktop beholder sin størrelse fra punkt 19 (50% af global h1).
+
+Font-family var allerede identisk: både hero-`<h1>` og VISION-boksens `<h2>` arver `font-family: 'Palatino', serif` fra den fælles `h1, h2, h3`-regel (linje 69-75) — ingen ændring nødvendig der. Størrelsen matchede derimod ikke: hero-`<h1>` brugte (via desktop-arv) `clamp(1.3rem, 4vw, 3rem)` fra punkt 19, mens `.vision-pitch h2` ikke har nogen font-size-override og derfor bruger base-`h2`s `clamp(2rem, 4.6vw, 3.6rem)`.
+
+Ny mobil-specifik regel:
+```css
+.hero-content h1 {
+  font-size: clamp(2rem, 4.6vw, 3.6rem);
+}
+```
+Samme clamp-værdi som base-`h2` (og dermed VISION-overskriften), så de to altid beregner præcis samme størrelse ved enhver mobil viewport-bredde, i stedet for et fast tal der kun ville matche ved én specifik bredde. Tjekket op imod sky-placeringen fra punkt 38/40: selv med den større skrift og deraf 2-linjers ombrydning ved smalle bredder holder tekstblokken sig stadig inden for himmelzonen (`top: 20%`) med mindst ~5 procentpoints margin til bygningskanten.
+
+**Status: implementeret.**
