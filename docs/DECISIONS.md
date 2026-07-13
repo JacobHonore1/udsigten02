@@ -376,3 +376,13 @@ I `.tvaersnit-layout` (mobilversionen af Sengetårnet-sektionen — jf. kodekomm
 **Status: implementeret.**
 
 **Status: implementeret.**
+
+## 37. Interaktiv adfærd tilføjet til hero-tilmeldingsfelt
+
+Tilføjet interaktiv adfærd til hero tilmeldingsfelt: placeholder skifter til "Indtast din e-mail" ved fokus (og tilbage til "Bliv skrevet op til en bolig!" ved blur, hvis feltet er tomt), og et send-ikon vises når en gyldig e-mail er indtastet.
+
+- **Placeholder-skift:** `focus`/`blur`-listeners på `.hero-signup-input` skifter `placeholder` mellem `data-focus-placeholder` og `data-default-placeholder` (dataattributter på selve inputtet, ingen hardcoded strenge i JS).
+- **Send-ikon:** Ny `<button class="hero-signup-send">` med inline SVG (papirfly, samme `18×18`-proportion som hus-ikonet) indsat efter inputtet. `input`-eventet tjekker `checkValidity()` på `type="email"`-feltet og toggler `.is-visible`. Klik logger e-mailen til konsollen, rydder feltet og sætter placeholder til "Tak, vi skriver dig op!" (`data-success-placeholder`).
+- **CSS:** `.hero-signup-send` mirrorer `.hero-signup-icon`s dimensioner (`40×40`, cirkulær) men bruger `var(--accent)`-baggrund og hvidt ikon, placeret i højre side. Skjult som standard (`width: 0; opacity: 0`), animeres ind via `transition` på `width`/`opacity`/`transform`/`margin-left` — intet hårdt layout-spring når den vises/skjules.
+
+**Status: implementeret. Fortsat ingen rigtig backend — kun console.log og visuel bekræftelse.**

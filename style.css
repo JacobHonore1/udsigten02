@@ -342,6 +342,36 @@ p {
   color: rgba(26, 20, 16, 0.45);
 }
 
+.hero-signup-send {
+  width: 0;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #fff;
+  cursor: pointer;
+  opacity: 0;
+  overflow: hidden;
+  padding: 0;
+  transform: scale(0.85);
+  transition: width 0.25s ease, opacity 0.2s ease, transform 0.2s ease, margin-left 0.25s ease;
+}
+
+.hero-signup-send.is-visible {
+  width: 40px;
+  opacity: 1;
+  transform: scale(1);
+  margin-left: 6px;
+}
+
+.hero-signup-send svg {
+  flex-shrink: 0;
+}
+
 /* ========== VISION PITCH BOX ========== */
 /* Outer: mirrors .hero exactly — same max-width, margin, gutter */
 .vision-pitch {
