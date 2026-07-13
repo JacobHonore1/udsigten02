@@ -18,7 +18,7 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $to = 'info@udsigten.dk, epl@seguro.dk, jh@zaxis.dk';
 $subject = 'Ny tilmelding - Udsigten Haderslev';
 $message = "Ny bolig-interesseret har skrevet sig op via hero-tilmeldingsfeltet paa hjemmesiden:\n\nE-mail: $email";
-$headers = "From: noreply@zaxis.dk\r\n";
+$headers = "From: jh@zaxis.dk\r\n";
 $headers .= "Reply-To: $email\r\n";
 
 $sent = mail($to, $subject, $message, $headers);
@@ -26,6 +26,7 @@ $sent = mail($to, $subject, $message, $headers);
 if ($sent) {
     echo json_encode(['success' => true]);
 } else {
+    error_log('subscribe.php: mail() returned false for ' . $email);
     http_response_code(500);
     echo json_encode(['success' => false, 'error' => 'Mail could not be sent']);
 }

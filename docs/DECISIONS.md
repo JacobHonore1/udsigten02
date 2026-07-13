@@ -464,3 +464,13 @@ Punkt 37 gav feltet klient-side interaktivitet (placeholder-skift, send-ikon), m
 - **Ingen ændring af Kontakt-sektionens formular** — den har fortsat kun en visuel `console.log`-fri "Sendt ✓"-tekstændring uden reel afsendelse (uden for scope for denne opgave).
 
 **Status: implementeret, men IKKE verificeret live** — kræver et faktisk test-signup på den deployede side for at bekræfte at Simply-hostingen understøtter PHP og at `mail()` rent faktisk leverer til alle tre indbakker (herunder tjek af spam-mapper, da PHP `mail()` uden SPF/DKIM-opsætning på afsenderdomænet kan blive markeret som spam).
+
+## 45. subscribe.php: fejlende afsendelse — PHP kører fint, men `mail()` returnerede false
+
+Brugeren testede live og fik "Der skete en fejl" ved rigtig indsendelse. Da direkte GET-kald til `https://zaxis.dk/udsigten02/subscribe.php` korrekt returnerer `{"success":false,"error":"Method not allowed"}`, er PHP-eksekvering på Simply-hostingen bekræftet at virke (punkt 44's usikkerhed om PHP-understøttelse er nu afklaret: den understøttes). Fejlen opstår derfor specifikt ved selve `mail()`-kaldet i POST-forløbet, som returnerer `false`.
+
+**Sandsynlig root cause:** `From`-headeren var sat til en opdigtet adresse (`noreply@zaxis.dk`), som formentlig ikke findes som en reel postkasse på domænet. Mange webhoteller (herunder sandsynligvis Simply) afviser eller fejler stille ved `mail()`, hvis afsenderadressen ikke svarer til en eksisterende, autoriseret postkasse på den tilknyttede konto — en anti-spoofing/anti-spam-foranstaltning.
+
+**Fix:** `From`-headeren ændret til `jh@zaxis.dk` — en adresse vi allerede med sikkerhed ved eksisterer, da den er en af de tre bekræftede modtageradresser. Derudover er der tilføjet `error_log('subscribe.php: mail() returned false for ' . $email);` ved fejl, så en fremtidig fejlende afsendelse kan spores i serverens PHP-fejllog (tilgængelig via Simply's kontrolpanel) i stedet for kun at vise en generisk fejl for brugeren.
+
+**Status: implementeret, afventer nyt live-test for at bekræfte at `mail()` nu lykkes.**
