@@ -403,4 +403,12 @@ Brugeren godkendte den interaktive tilmeldingsboks (placeholder-skift + send-iko
 
 **Status: implementeret.**
 
+## 40. Mobil hero-billede vistes ikke — root cause fundet: mellemrum i `srcset` er ikke det samme som mellemrum i `src`
+
+Efter flere runder af (forgæves) fejlsøgning omkring caching, breakpoints og desktop-visning på en Samsung-telefon, viste direkte sammenligning af serverens svar mod den lokale kildekode at både HTML og billedfil rent faktisk var korrekt deployeret. Problemet lå i selve markup'en, ikke i deploy eller cache.
+
+**Root cause:** `<source media="(max-width: 767px)" srcset="images/Side 1_frontpage_cover_mobile.jpg">` bruger attributten `srcset`, ikke `src`. `srcset`-attributten bruger mellemrum som *separator* mellem flere billedkandidater og deres bredde/tæthed-deskriptorer (fx `"a.jpg 1x, b.jpg 2x"`). Et urekodet mellemrum i selve filnavnet ("Side 1_...") bliver derfor fejlagtigt tolket af browserens `srcset`-parser som et skel mellem to separate kandidater, hvilket gør hele værdien ugyldig eller uforudsigelig. Dette er en anden situation end almindelige `src`-attributter (fx `<img src="images/Side 1_frontpage_cover.jpg">` på linjen lige under), hvor et enkelt mellemrum tolereres fint, fordi `src` kun indeholder én URL uden separator-semantik — hvilket er grunden til at de øvrige hero-billedreferencer med mellemrum i filnavnet allerede fungerede korrekt, mens netop denne ene (i `srcset`) ikke gjorde.
+
+**Fix:** Mellemrummet i `srcset`-værdien er procent-kodet: `srcset="images/Side%201_frontpage_cover_mobile.jpg"`. Punkt 38's tidligere begrundelse om at bevare rå mellemrum "for konsistens" var forkert for denne specifikke attribut — konsistensen gælder kun for `src`, ikke `srcset`. Gennemgået resten af filen: der er kun ét `<source>`-element i `index.html`, så ingen andre steder er ramt af samme fejl.
+
 **Status: implementeret.**
