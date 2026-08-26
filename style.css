@@ -372,6 +372,14 @@ p {
   flex-shrink: 0;
 }
 
+.hero-signup-disclaimer {
+  margin: 8px 0 0;
+  padding-right: calc(var(--gutter) + clamp(16px, 2vw, 24px));
+  text-align: right;
+  font-size: 11px;
+  color: rgba(26, 20, 16, 0.45);
+}
+
 /* ========== VISION PITCH BOX ========== */
 /* Outer: mirrors .hero exactly — same max-width, margin, gutter */
 .vision-pitch {
@@ -989,6 +997,11 @@ p {
 
   .hero-signup-input {
     font-size: 0.72rem;
+  }
+
+  .hero-signup-disclaimer {
+    padding-right: 0;
+    text-align: center;
   }
 }
 

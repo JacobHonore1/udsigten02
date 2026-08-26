@@ -13,10 +13,10 @@ jobs:
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
-          server: linux289.unoeuro.com
-          username: zaxis.dk
-          password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/udsigten02/
+          server: ftp.simply.com
+          username: udsigten.dk
+          password: ${{ secrets.FTP_PASSWORD_UDSIGTEN }}
+          server-dir: /public_html/
           exclude: |
             **/.git*
             **/.git*/**
