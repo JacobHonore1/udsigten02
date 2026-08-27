@@ -272,6 +272,7 @@ p {
   top: 50%;
   transform: translateY(-50%);
   color: var(--text);
+  text-align: left;
 }
 
 .hero-content h1 {
