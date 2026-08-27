@@ -380,6 +380,19 @@ p {
   color: rgba(26, 20, 16, 0.45);
 }
 
+@keyframes hero-signup-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+  }
+}
+
+.hero-signup {
+  animation: hero-signup-pulse 2s ease-in-out infinite;
+}
+
 /* ========== VISION PITCH BOX ========== */
 /* Outer: mirrors .hero exactly — same max-width, margin, gutter */
 .vision-pitch {
