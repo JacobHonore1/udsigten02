@@ -269,8 +269,8 @@ p {
 .hero-content {
   position: absolute;
   left: calc(var(--gutter) + clamp(20px, 3vw, 48px));
-  top: 50%;
-  transform: translateY(-50%);
+  top: 12%;
+  transform: none;
   color: var(--text);
   text-align: left;
 }
