@@ -9,6 +9,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $name = trim($_POST['name'] ?? '');
 $email = trim($_POST['email'] ?? '');
+// Valgfrit felt: kun cifre, mellemrum, + og - bevares
+$phone = substr(preg_replace('/[^0-9+\- ]/', '', trim($_POST['phone'] ?? '')), 0, 30);
 $timeslot = trim($_POST['timeslot'] ?? '');
 $guests = filter_var($_POST['guests'] ?? '', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]]);
 
@@ -51,9 +53,9 @@ $fileExists = file_exists($csvFile);
 $fp = fopen($csvFile, 'a');
 if ($fp) {
     if (!$fileExists) {
-        fputcsv($fp, ['Navn', 'E-mail', 'Rundvisning', 'Antal deltagere', 'Tilmeldt']);
+        fputcsv($fp, ['Navn', 'E-mail', 'Rundvisning', 'Antal deltagere', 'Tilmeldt', 'Telefon']);
     }
-    fputcsv($fp, [$name, $email, $timeslotLabel, $guests, date('Y-m-d H:i:s')]);
+    fputcsv($fp, [$name, $email, $timeslotLabel, $guests, date('Y-m-d H:i:s'), $phone]);
     fclose($fp);
 } else {
     error_log('event-subscribe.php: kunne ikke skrive til CSV for ' . $email);
@@ -64,6 +66,7 @@ $subject = 'Ny tilmelding - Åbent Hus, Arkitekturens Dag';
 $message = "Ny tilmelding til Åbent Hus (Arkitekturens Dag, 5. oktober):\n\n"
     . "Navn: $name\n"
     . "E-mail: $email\n"
+    . "Telefon: " . ($phone !== '' ? $phone : '(ikke angivet)') . "\n"
     . "Rundvisning: $timeslotLabel\n"
     . "Antal deltagere: $guests";
 $headers = "From: noreply@udsigten.dk\r\n";

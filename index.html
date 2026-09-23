@@ -75,7 +75,8 @@
       <div class="section-block">
         <h2>ÅBENT HUS<br>ARKITEKTURENS DAG</h2>
         <p class="event-date">Mandag den 5. oktober 2026 · kl. 16.30–18.00</p>
-        <p>Vær med når vi åbner dørene til Sengetårnet i det tidligere sygehus i Haderslev og viser projektet frem. Alle er velkomne.</p>
+        <p>Vær med når vi åbner dørene til Sengetårnet i det tidligere sygehus i Haderslev og viser projektet frem.</p>
+        <p><b>Alle som er tilmeldt på forhånd er velkomne.</b></p>
         <p><b>Mødested:</b> P-pladsen, Camp West, Skallebækvej 17, 6100 Haderslev</p>
         <p><b>Rundvisning i to hold</b> (ca. 30–40 minutter hver):</p>
         <ul class="feature-list">
@@ -87,6 +88,7 @@
     <form class="kontakt-form event-signup reveal" id="eventSignupForm" onsubmit="eventSignupSubmit(event)">
       <input type="text" id="eventName" placeholder="Navn" required>
       <input type="email" id="eventEmail" placeholder="E-mail" required>
+      <input type="tel" id="eventPhone" placeholder="Telefonnummer (valgfrit)">
       <select id="eventTimeslot" required>
         <option value="" disabled selected>Vælg tidspunkt</option>
         <option value="16:30">1. hold — kl. 16.30</option>
@@ -472,6 +474,7 @@ function eventSignupSubmit(e) {
   const btn = document.getElementById('eventSignupBtn');
   const nameInput = document.getElementById('eventName');
   const emailInput = document.getElementById('eventEmail');
+  const phoneInput = document.getElementById('eventPhone');
   const timeslotInput = document.getElementById('eventTimeslot');
   const guestsInput = document.getElementById('eventGuests');
   const originalBtnText = btn.textContent;
@@ -484,6 +487,7 @@ function eventSignupSubmit(e) {
     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
     body: 'name=' + encodeURIComponent(nameInput.value.trim()) +
       '&email=' + encodeURIComponent(emailInput.value.trim()) +
+      '&phone=' + encodeURIComponent(phoneInput.value.trim()) +
       '&timeslot=' + encodeURIComponent(timeslotInput.value) +
       '&guests=' + encodeURIComponent(guestsInput.value)
   })
@@ -493,6 +497,7 @@ function eventSignupSubmit(e) {
         btn.textContent = '✓ Du har modtaget en mail — vi glæder os til at vise dig vores vision for Udsigten!';
         nameInput.value = '';
         emailInput.value = '';
+        phoneInput.value = '';
         timeslotInput.selectedIndex = 0;
         guestsInput.value = '';
       } else {
