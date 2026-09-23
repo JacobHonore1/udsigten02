@@ -189,15 +189,14 @@ p {
   left: 0;
   width: 100%;
   z-index: 999;
-  background: transparent;
+  background: var(--bg);
   border-bottom: 1px solid transparent;
-  padding: 16px 0;
-  transition: padding 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  padding: 12px 0;
+  transition: padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .site-header.scrolled {
-  background: var(--bg);
-  padding: 10px 0;
+  padding: 8px 0;
   border-bottom-color: var(--line);
   box-shadow: 0 2px 16px rgba(26, 20, 16, 0.04);
 }
@@ -220,7 +219,7 @@ p {
 }
 
 .header-inner .logo-img {
-  height: 64px;
+  height: 48px;
 }
 
 .main-nav {
@@ -284,25 +283,12 @@ p {
 .hero {
   position: relative;
   max-width: var(--content-width);
-  margin: var(--banner-height) auto 0; /* header floats transparently on top of hero, only event-banner reserves space */
+  margin: calc(76px + var(--banner-height)) auto 0; /* clears fixed header (12px top-padding + 48px logo + 12px bottom-padding = 72px) + 4px buffer + event-banner */
   padding: 0 var(--gutter);
 }
 
 .hero-media {
   position: relative;
-}
-
-.hero-media::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 160px;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0));
-  pointer-events: none;
-  /* ingen z-index: skal males over billedet (ikke-positioneret) men under
-     hero-content/hero-signup (positioneret, z-index:auto), som styres af DOM-rækkefølge */
 }
 
 .hero-bg {
@@ -1028,7 +1014,7 @@ p {
   }
 
   .header-inner .logo-img {
-    height: 36px;
+    height: 28px;
   }
 
   .footer-inner .logo-img {
@@ -1036,11 +1022,7 @@ p {
   }
 
   .hero {
-    margin: var(--banner-height) auto 0; /* header floats transparently on top of hero on mobile too */
-  }
-
-  .hero-media::before {
-    height: 110px;
+    margin: calc(56px + var(--banner-height)) auto 0; /* clears fixed mobile header (12px top-padding + 28px logo + 12px bottom-padding = 52px) + 4px buffer + event-banner */
   }
 
   .hero-content {
