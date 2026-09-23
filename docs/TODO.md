@@ -29,8 +29,15 @@ Følgende illustrationer findes i `Udsigten_Haderslev_2404 (2).pdf` men er ikke 
 
 ## Infrastruktur
 
-- [ ] Ingen custom domæne sat op specifikt for udsigten02 — kører på `zaxis.dk/udsigten02` via Simply mappestruktur, hvilket virker, men er ikke et "rigtigt" eget domæne
 - [ ] Ingen 404-side eller fejlhåndtering testet
+- [ ] `zaxis.dk/udsigten02` er ikke længere deploy-target (se DECISIONS.md #46) og er frosset siden 2026-08-26 — afklar med kunden om den gamle undermappe skal have en redirect til `udsigten.dk`, eller bare efterlades
+
+## Event-banner (Arkitekturens Dag) — FJERN EFTER 2026-10-05
+
+- [ ] Fjern `.event-banner`-elementet og event-sektionen (`#event`) fra `index.html`
+- [ ] Fjern `.event-banner`, `.event-banner-cta`, `.event-grid`, `.event-info`, `.event-date`, `.event-signup-disclaimer` og `--banner-height`-referencerne fra `style.css` (både `:root` og mobil-medieforespørgslen), og sæt `.site-header`s `top` og `.hero`s `margin` tilbage til faste px-værdier
+- [ ] Fjern/arkivér `event-subscribe.php` og `eventSignupSubmit()` i `index.html`
+- [ ] Afgør med kunden om `/data/arkitekturens-dag.csv` skal beholdes som arkiv eller slettes
 
 ## Indhold der mangler endelig godkendelse fra kunden
 

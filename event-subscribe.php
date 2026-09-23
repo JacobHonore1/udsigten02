@@ -1,0 +1,81 @@
+<?php
+header('Content-Type: application/json');
+
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+    http_response_code(405);
+    echo json_encode(['success' => false, 'error' => 'Method not allowed']);
+    exit;
+}
+
+$name = trim($_POST['name'] ?? '');
+$email = trim($_POST['email'] ?? '');
+$timeslot = trim($_POST['timeslot'] ?? '');
+$guests = filter_var($_POST['guests'] ?? '', FILTER_VALIDATE_INT, ['options' => ['min_range' => 1, 'max_range' => 10]]);
+
+$allowedTimeslots = [
+    '16:30' => '1. hold — kl. 16.30',
+    '17:15' => '2. hold — kl. 17.15',
+];
+
+if ($name === '') {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => 'Invalid name']);
+    exit;
+}
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => 'Invalid email']);
+    exit;
+}
+
+if (!isset($allowedTimeslots[$timeslot])) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => 'Invalid timeslot']);
+    exit;
+}
+
+if ($guests === false) {
+    http_response_code(400);
+    echo json_encode(['success' => false, 'error' => 'Invalid guests']);
+    exit;
+}
+
+$timeslotLabel = $allowedTimeslots[$timeslot];
+
+// Separat CSV fra den generelle tilmeldingsliste, ligger i /data/ mappen,
+// et niveau over public_html, uden for web root.
+$csvFile = dirname(__DIR__) . '/data/arkitekturens-dag.csv';
+$fileExists = file_exists($csvFile);
+
+$fp = fopen($csvFile, 'a');
+if ($fp) {
+    if (!$fileExists) {
+        fputcsv($fp, ['Navn', 'E-mail', 'Rundvisning', 'Antal deltagere', 'Tilmeldt']);
+    }
+    fputcsv($fp, [$name, $email, $timeslotLabel, $guests, date('Y-m-d H:i:s')]);
+    fclose($fp);
+} else {
+    error_log('event-subscribe.php: kunne ikke skrive til CSV for ' . $email);
+}
+
+$to = 'nyt@udsigten.dk';
+$subject = 'Ny tilmelding - Åbent Hus, Arkitekturens Dag';
+$message = "Ny tilmelding til Åbent Hus (Arkitekturens Dag, 5. oktober):\n\n"
+    . "Navn: $name\n"
+    . "E-mail: $email\n"
+    . "Rundvisning: $timeslotLabel\n"
+    . "Antal deltagere: $guests";
+$headers = "From: noreply@udsigten.dk\r\n";
+$headers .= "Cc: epl@seguro.dk\r\n";
+$headers .= "Reply-To: $email\r\n";
+
+$sent = mail($to, $subject, $message, $headers);
+
+if ($sent) {
+    echo json_encode(['success' => true]);
+} else {
+    error_log('event-subscribe.php: mail() returned false for ' . $email);
+    http_response_code(500);
+    echo json_encode(['success' => false, 'error' => 'Mail could not be sent']);
+}

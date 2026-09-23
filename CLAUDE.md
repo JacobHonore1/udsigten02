@@ -74,10 +74,11 @@ Der er flere illustrationer i pitchen (situationsplan, arkitektskitser, town hou
 ## Infrastruktur og deploy
 
 - **Repo:** `github.com/JacobHonore1/udsigten02`
-- **Hosting:** Simply.com, mappe `/public_html/udsigten02/`
-- **Deploy:** GitHub Actions (`.github/workflows/deploy.yml`) — push til `main` trigger automatisk FTP-deploy til Simply
-- **Secret:** `FTP_PASSWORD` er sat i repo Settings → Secrets → Actions
-- **Live URL:** `zaxis.dk/udsigten02`
+- **Hosting:** Simply.com, root af egen konto `udsigten.dk` (`/public_html/`) — IKKE længere en undermappe på zaxis.dk-kontoen
+- **Deploy:** GitHub Actions (`.github/workflows/deploy.yml`) — push til `main` trigger automatisk FTP-deploy til Simply. **Dette går direkte til produktion uden staging-trin** — vær ekstra forsigtig med hvad der pushes til `main`.
+- **Secret:** `FTP_PASSWORD_UDSIGTEN` er sat i repo Settings → Secrets → Actions (det gamle `FTP_PASSWORD`-secret er bevidst bevaret til senere brug, se `docs/DECISIONS.md` #46)
+- **Live URL:** `udsigten.dk`
+- **Forældet/frosset:** `zaxis.dk/udsigten02` var det oprindelige live-URL, men har ikke modtaget deploys siden domæneflytningen 2026-08-26 (se `docs/DECISIONS.md` #46). Den er ikke i sync med git og bør ikke bruges som reference.
 
 Se `docs/WORKFLOW.md` for den fulde arbejdsgang fra prompt til live site.
 

@@ -29,6 +29,7 @@
   --content-width: 1300px;
   --gutter:    clamp(24px, 4vw, 60px);
   --section-pad: clamp(16px, 2.5vw, 30px);
+  --banner-height: 44px; /* Event-banner (Arkitekturens Dag), fjern var sammen med .event-banner efter 2026-10-05 */
 }
 
 /* ========== BASE ========== */
@@ -153,10 +154,38 @@ p {
   border-color: #fff;
 }
 
+/* ========== EVENT BANNER (Arkitekturens Dag) — midlertidig, fjern hele blokken + HTML efter 2026-10-05 ========== */
+.event-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  background: var(--accent);
+  color: #fff;
+  text-align: center;
+  padding: 10px var(--gutter);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+
+.event-banner-cta {
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
 /* ========== NAV ========== */
 .site-header {
   position: fixed;
-  top: 0;
+  top: var(--banner-height);
   left: 0;
   width: 100%;
   z-index: 999;
@@ -250,7 +279,7 @@ p {
 .hero {
   position: relative;
   max-width: var(--content-width);
-  margin: 148px auto 0; /* clears fixed header (22px top-padding + 100px logo + 22px bottom-padding = 144px) */
+  margin: calc(148px + var(--banner-height)) auto 0; /* clears fixed header (144px) + event-banner */
   padding: 0 var(--gutter);
 }
 
@@ -488,6 +517,27 @@ p {
 .section-lead {
   max-width: 680px;
   margin-bottom: 8px;
+}
+
+/* ========== EVENT (Arkitekturens Dag) — midlertidig, fjern efter 2026-10-05 ========== */
+.event-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 90px);
+  align-items: start;
+}
+
+.event-info p { margin-top: 18px; }
+
+.event-date {
+  font-weight: 600;
+  color: var(--text);
+}
+
+.event-signup-disclaimer {
+  font-size: 11px;
+  color: rgba(26, 20, 16, 0.45);
+  margin-top: -4px;
 }
 
 /* ========== VISION ========== */
@@ -733,6 +783,7 @@ p {
 }
 
 .kontakt-form input,
+.kontakt-form select,
 .kontakt-form textarea {
   width: 100%;
   padding: 16px 18px;
@@ -747,6 +798,7 @@ p {
 }
 
 .kontakt-form input:focus,
+.kontakt-form select:focus,
 .kontakt-form textarea:focus {
   outline: none;
   border-color: var(--accent);
@@ -754,6 +806,9 @@ p {
 
 .kontakt-form input::placeholder,
 .kontakt-form textarea::placeholder { color: var(--muted); }
+
+.kontakt-form select { color: var(--text); }
+.kontakt-form select:invalid { color: var(--muted); }
 
 .kontakt-form .btn { align-self: flex-start; }
 
@@ -921,7 +976,8 @@ p {
   .vision-grid,
   .split,
   .status-grid,
-  .kontakt-grid {
+  .kontakt-grid,
+  .event-grid {
     grid-template-columns: 1fr;
   }
 
@@ -942,12 +998,16 @@ p {
 }
 
 @media (max-width: 768px) {
+  :root {
+    --banner-height: 68px; /* event-banner-tekst ombrydes til 2 linjer på mobil */
+  }
+
   .logo-img {
     height: 50px;
   }
 
   .hero {
-    margin: 98px auto 0; /* clears fixed mobile header (22px top-padding + 50px logo + 22px bottom-padding = 94px) + 4px buffer */
+    margin: calc(98px + var(--banner-height)) auto 0; /* clears fixed mobile header (94px) + 4px buffer + event-banner */
   }
 
   .hero-content {
