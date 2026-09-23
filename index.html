@@ -490,7 +490,7 @@ function eventSignupSubmit(e) {
     .then(res => res.json())
     .then(data => {
       if (data.success) {
-        btn.textContent = 'Tilmeldt ✓';
+        btn.textContent = '✓ Du har modtaget en mail — vi glæder os til at vise dig vores vision for Udsigten!';
         nameInput.value = '';
         emailInput.value = '';
         timeslotInput.selectedIndex = 0;

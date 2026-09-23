@@ -496,4 +496,6 @@ Kunden bad om et event-banner på forsiden for "Arkitekturens Dag" (mandag d. 5.
 
 **Midlertidigt indhold:** banneret, event-sektionen, `--banner-height`-variablen og `event-subscribe.php` er alle markeret med HTML/CSS-kommentarer om at de skal fjernes efter 2026-10-05. Se `docs/TODO.md`.
 
-**Status: implementeret, afventer visuel verifikation i browser og reelt afsendt tilmelding før det regnes som færdigt.**
+- **Bekræftelsesmail til afsender:** `event-subscribe.php` sender nu også en separat mail direkte til den tilmeldte (`$email`), med dato, valgt tidspunkt, mødested og teksten "Vi glæder os til at vise dig vores vision for Udsigten Haderslev!". Denne mail er best-effort (fejler den, blokerer det ikke svaret til brugeren — samme uafhængige fejlhåndtering som CSV-skrivningen, jf. punkt 46). Samme sætning genbruges i frontend'en: knappen skifter ved succes til "✓ Du har modtaget en mail — vi glæder os til at vise dig vores vision for Udsigten!" i stedet for et kort "Tilmeldt ✓". Ny CSS `.event-signup.kontakt-form .btn` sat til `align-self: stretch; white-space: normal; text-align: center;` så den længere tekst ombrydes pænt i stedet for at flyde ud over formularens bredde.
+
+**Status: implementeret og deployet til `udsigten.dk` (commit `86b8828` + opfølgende commit for bekræftelsesmail). Verificeret at banner og event-sektion vises live. Reel test-tilmelding (CSV + begge mails) afventer.**

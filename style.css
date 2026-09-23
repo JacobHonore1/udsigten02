@@ -540,6 +540,13 @@ p {
   margin-top: -4px;
 }
 
+.event-signup.kontakt-form .btn {
+  align-self: stretch;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.4;
+}
+
 /* ========== VISION ========== */
 .vision-grid {
   display: grid;

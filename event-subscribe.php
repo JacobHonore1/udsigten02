@@ -72,6 +72,23 @@ $headers .= "Reply-To: $email\r\n";
 
 $sent = mail($to, $subject, $message, $headers);
 
+// Bekræftelsesmail til den der har tilmeldt sig. Fejler denne, blokerer det
+// ikke svaret til brugeren — samme uafhængige fejl-håndtering som CSV-skrivningen.
+$confirmSubject = 'Du er tilmeldt - Åbent Hus, Arkitekturens Dag';
+$confirmMessage = "Hej $name,\n\n"
+    . "Tak for din tilmelding til Åbent Hus på Udsigten Haderslev i forbindelse med Arkitekturens Dag.\n\n"
+    . "Dato: Mandag den 5. oktober 2026\n"
+    . "Tidspunkt: $timeslotLabel\n"
+    . "Mødested: P-pladsen, Camp West, Skallebækvej 17, 6100 Haderslev\n"
+    . "Antal deltagere: $guests\n\n"
+    . "Vi glæder os til at vise dig vores vision for Udsigten Haderslev!\n\n"
+    . "Venlig hilsen\nUdsigten Haderslev";
+$confirmHeaders = "From: noreply@udsigten.dk\r\n";
+
+if (!mail($email, $confirmSubject, $confirmMessage, $confirmHeaders)) {
+    error_log('event-subscribe.php: bekraeftelsesmail fejlede for ' . $email);
+}
+
 if ($sent) {
     echo json_encode(['success' => true]);
 } else {
