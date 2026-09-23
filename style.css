@@ -191,12 +191,12 @@ p {
   z-index: 999;
   background: var(--bg);
   border-bottom: 1px solid transparent;
-  padding: 22px 0;
+  padding: 16px 0;
   transition: padding 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .site-header.scrolled {
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom-color: var(--line);
   box-shadow: 0 2px 16px rgba(26, 20, 16, 0.04);
 }
@@ -216,6 +216,10 @@ p {
   height: 100px;
   width: auto;
   display: block;
+}
+
+.header-inner .logo-img {
+  height: 64px;
 }
 
 .main-nav {
@@ -279,7 +283,7 @@ p {
 .hero {
   position: relative;
   max-width: var(--content-width);
-  margin: calc(148px + var(--banner-height)) auto 0; /* clears fixed header (144px) + event-banner */
+  margin: calc(100px + var(--banner-height)) auto 0; /* clears fixed header (16px top-padding + 64px logo + 16px bottom-padding = 96px) + 4px buffer + event-banner */
   padding: 0 var(--gutter);
 }
 
@@ -1009,12 +1013,16 @@ p {
     --banner-height: 68px; /* event-banner-tekst ombrydes til 2 linjer på mobil */
   }
 
-  .logo-img {
+  .header-inner .logo-img {
+    height: 36px;
+  }
+
+  .footer-inner .logo-img {
     height: 50px;
   }
 
   .hero {
-    margin: calc(98px + var(--banner-height)) auto 0; /* clears fixed mobile header (94px) + 4px buffer + event-banner */
+    margin: calc(72px + var(--banner-height)) auto 0; /* clears fixed mobile header (16px top-padding + 36px logo + 16px bottom-padding = 68px) + 4px buffer + event-banner */
   }
 
   .hero-content {
