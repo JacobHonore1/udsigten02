@@ -85,19 +85,12 @@
         </ul>
       </div>
     </div>
-    <form class="kontakt-form event-signup reveal" id="eventSignupForm" onsubmit="eventSignupSubmit(event)">
-      <input type="text" id="eventName" placeholder="Navn" required>
-      <input type="email" id="eventEmail" placeholder="E-mail" required>
-      <input type="tel" id="eventPhone" placeholder="Telefonnummer (valgfrit)">
-      <select id="eventTimeslot" required>
-        <option value="" disabled selected>Vælg tidspunkt</option>
-        <option value="16:30">1. hold — kl. 16.30</option>
-        <option value="17:15">2. hold — kl. 17.15</option>
-      </select>
-      <input type="number" id="eventGuests" placeholder="Antal deltagere" min="1" max="10" required>
-      <button type="submit" class="btn" id="eventSignupBtn">Tilmeld dig</button>
-      <p class="event-signup-disclaimer">Dine oplysninger bruges kun til at kontakte dig om dette arrangement.</p>
-    </form>
+    <div class="section-block event-full reveal">
+      <h2>KAPACITETEN ER NÅET</h2>
+      <p><b>Der er nu over 500 tilmeldte til arrangementet, og vores kapacitet er nået.</b></p>
+      <p>Vi takker for den store interesse.</p>
+      <p>Hvis du fortsat er interesseret i at følge med og blive inviteret til fremtidige begivenheder, er du meget velkommen til at skrive til os på <a href="mailto:info@udsigten.dk">info@udsigten.dk</a>.</p>
+    </div>
   </div>
 </section>
 
@@ -468,48 +461,6 @@ function kontaktSubmit(e) {
   btn.disabled = true;
 }
 
-// Event-tilmelding: Åbent Hus — Arkitekturens Dag (separat liste, se event-subscribe.php)
-function eventSignupSubmit(e) {
-  e.preventDefault();
-  const btn = document.getElementById('eventSignupBtn');
-  const nameInput = document.getElementById('eventName');
-  const emailInput = document.getElementById('eventEmail');
-  const phoneInput = document.getElementById('eventPhone');
-  const timeslotInput = document.getElementById('eventTimeslot');
-  const guestsInput = document.getElementById('eventGuests');
-  const originalBtnText = btn.textContent;
-
-  btn.disabled = true;
-  btn.textContent = 'Sender...';
-
-  fetch('event-subscribe.php', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
-    body: 'name=' + encodeURIComponent(nameInput.value.trim()) +
-      '&email=' + encodeURIComponent(emailInput.value.trim()) +
-      '&phone=' + encodeURIComponent(phoneInput.value.trim()) +
-      '&timeslot=' + encodeURIComponent(timeslotInput.value) +
-      '&guests=' + encodeURIComponent(guestsInput.value)
-  })
-    .then(res => res.json())
-    .then(data => {
-      if (data.success) {
-        btn.textContent = '✓ Du har modtaget en mail — vi glæder os til at vise dig vores vision for Udsigten!';
-        nameInput.value = '';
-        emailInput.value = '';
-        phoneInput.value = '';
-        timeslotInput.selectedIndex = 0;
-        guestsInput.value = '';
-      } else {
-        btn.textContent = 'Der skete en fejl, prøv igen';
-        btn.disabled = false;
-      }
-    })
-    .catch(() => {
-      btn.textContent = 'Der skete en fejl, prøv igen';
-      btn.disabled = false;
-    });
-}
 </script>
 </body>
 </html>

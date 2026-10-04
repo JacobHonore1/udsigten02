@@ -531,24 +531,12 @@ p {
   align-items: start;
 }
 
-.event-info p { margin-top: 18px; }
+.event-info p,
+.event-full p { margin-top: 18px; }
 
 .event-date {
   font-weight: 600;
   color: var(--text);
-}
-
-.event-signup-disclaimer {
-  font-size: 11px;
-  color: rgba(26, 20, 16, 0.45);
-  margin-top: -4px;
-}
-
-.event-signup.kontakt-form .btn {
-  align-self: stretch;
-  white-space: normal;
-  text-align: center;
-  line-height: 1.4;
 }
 
 /* ========== VISION ========== */
