@@ -524,19 +524,16 @@ p {
 }
 
 /* ========== EVENT (Arkitekturens Dag) — midlertidig, fjern efter 2026-10-05 ========== */
-.event-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 5vw, 90px);
-  align-items: start;
-}
-
-.event-info p,
 .event-full p { margin-top: 18px; }
 
 .event-date {
   font-weight: 600;
   color: var(--text);
+}
+
+.event-highlight {
+  font-size: 1.25rem;
+  line-height: 1.4;
 }
 
 /* ========== VISION ========== */
@@ -976,10 +973,6 @@ p {
   .split,
   .status-grid,
   .kontakt-grid,
-  .event-grid {
-    grid-template-columns: 1fr;
-  }
-
   .vision-image {
     min-height: 360px;
     order: -1;
