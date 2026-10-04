@@ -71,12 +71,12 @@
 <!-- EVENT: ÅBENT HUS — ARKITEKTURENS DAG — midlertidig, fjern efter 2026-10-05 (se docs/DECISIONS.md) -->
 <section class="section event-section" id="event">
   <div class="container">
-    <div class="section-block event-full reveal">
+    <div class="section-block event-full">
       <h2>ÅBENT HUS<br>ARKITEKTURENS DAG</h2>
       <p class="event-date">Mandag den 5. oktober 2026 · kl. 16.30–18.00</p>
       <p>Vær med når vi åbner dørene til Sengetårnet i det tidligere sygehus i Haderslev og viser projektet frem.</p>
-      <p class="event-highlight"><b>Tilmeldingen er nu lukket, og vi er meget glade for, at mere end 500 har tilmeldt sig arrangementet.</b></p>
-      <p>Der kommer et nyhedsbrev med mere information om både arrangementet og Udsigten. Hvis du ønsker at se mere og modtage fremtidig information om Udsigten, er du meget velkommen til at skrive til os på <a href="mailto:info@udsigten.dk">info@udsigten.dk</a>.</p>
+      <p class="event-highlight">Tilmeldingen er nu lukket.<br>Vi er meget glade for, at<br><span class="event-count">mere end 500</span><br>har tilmeldt sig arrangementet.</p>
+      <p>Der kommer et nyhedsbrev med mere information om både arrangementet og Udsigten.<br>Hvis du ønsker at se mere og modtage fremtidig information om Udsigten, er du meget velkommen til at skrive til os på<br><a href="mailto:info@udsigten.dk">info@udsigten.dk</a>.</p>
     </div>
   </div>
 </section>
@@ -388,6 +388,15 @@ const observer = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('is-visible'); });
 }, {threshold: 0.08});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Event-banner: viser/skjuler Åbent Hus-boksen (midlertidig)
+const eventBanner = document.getElementById('eventBanner');
+const eventBox = document.querySelector('.event-full');
+eventBanner.addEventListener('click', e => {
+  e.preventDefault();
+  const isOpen = eventBox.classList.toggle('is-open');
+  if (isOpen) eventBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+});
 
 // Hero tilmeldingsfelt: dynamisk placeholder + send-ikon ved gyldig e-mail
 const heroSignupInput = document.getElementById('heroSignupInput');

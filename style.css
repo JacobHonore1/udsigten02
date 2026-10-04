@@ -524,6 +524,13 @@ p {
 }
 
 /* ========== EVENT (Arkitekturens Dag) — midlertidig, fjern efter 2026-10-05 ========== */
+.event-full {
+  display: none;
+  text-align: center;
+}
+
+.event-full.is-open { display: block; }
+
 .event-full p { margin-top: 18px; }
 
 .event-date {
@@ -532,8 +539,17 @@ p {
 }
 
 .event-highlight {
-  font-size: 1.25rem;
-  line-height: 1.4;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.event-count {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 6px;
 }
 
 /* ========== VISION ========== */
