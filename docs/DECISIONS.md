@@ -503,3 +503,7 @@ Kunden bad om et event-banner på forsiden for "Arkitekturens Dag" (mandag d. 5.
 ## 48. Event-tilmelding lukket: kapacitet nået
 
 Tilmeldingsformularen i event-sektionen er erstattet af en besked om at der er over 500 tilmeldte, og at kapaciteten er nået, med en opfordring til at skrive til info@udsigten.dk for fremtidige begivenheder. Topbanneret er bevaret. Fjernet: `eventSignupSubmit()` i `index.html` samt CSS-reglerne `.event-signup-disclaimer` og `.event-signup.kontakt-form .btn`. `event-subscribe.php` er ikke slettet endnu (følger den planlagte oprydning i `docs/TODO.md`).
+
+## 49. Event-boks skjult til banner-klik, hero-felt skifter til nyheds-tekst
+
+Event-boksen er skjult som standard (`.event-full` `display: none`) og vises/skjules ved klik på topbanneret (`is-open`-klasse). Kun højdepunkt-sætningen er centreret; resten står venstrestillet. Understregning kun på "lukket" og "500". Hero-feltets placeholder er ændret fra "Bliv skrevet op til en bolig!" til "Modtag mere info og nyheder!".
