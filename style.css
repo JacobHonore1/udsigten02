@@ -499,6 +499,12 @@ p {
   margin-top: 12px;
 }
 
+.event-highlight {
+  text-decoration: underline;
+  text-decoration-color: var(--accent);
+  text-underline-offset: 3px;
+}
+
 .event-gallery {
   display: flex;
   flex-direction: column;
@@ -513,12 +519,16 @@ p {
   border-radius: 8px;
 }
 
+.event-cover {
+  position: relative;
+  margin-top: 16px;
+}
+
 .event-cover-img {
   display: block;
   width: 100%;
   height: auto;
   border-radius: 8px;
-  margin-top: 24px;
 }
 
 .event-foldout {
@@ -526,19 +536,37 @@ p {
   padding-left: 24px;
 }
 
-.event-foldout summary,
+.event-foldout-toggle {
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 20px;
+}
+
+.event-foldout-toggle:hover {
+  background: var(--text);
+}
+
+.event-cover-toggle {
+  position: absolute;
+  left: 24px;
+  bottom: 24px;
+  padding: 18px 32px;
+  font-size: 1rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
+}
+
 .event-foldout-close {
   cursor: pointer;
   font-weight: 600;
   color: var(--accent);
   font-size: 0.95rem;
-}
-
-.event-foldout summary {
-  list-style: none;
-}
-
-.event-foldout-close {
   display: block;
   margin-top: 24px;
   background: none;
@@ -547,21 +575,17 @@ p {
   font-family: inherit;
 }
 
-.event-foldout summary::-webkit-details-marker { display: none; }
-
-.event-foldout summary::after {
-  content: '↓';
-  display: inline-block;
-  margin-left: 6px;
-  transition: transform 0.2s ease;
-}
-
-.event-foldout[open] summary::after {
-  transform: rotate(180deg);
-}
-
 .event-foldout-content {
   margin-top: 18px;
+}
+
+.event-video {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 24px;
+  background: #000;
 }
 
 /* ========== VISION ========== */

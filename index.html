@@ -67,16 +67,22 @@
   <div class="container">
     <div class="section-block">
       <h2>ARKITEKTURENS DAG PÅ UDSIGTEN BLEV ET KÆMPE TILLØBSTYKKE</h2>
-      <p>Mere end 500 interesserede deltog i Arkitekturens Dag på Udsigten.</p>
-      <p>Tak for den store opbakning og den gode stemning.</p>
-      <p>Dagen forløb i god ro og orden, på trods af den store interesse.</p>
-      <p>Vi sender fremover nyhedsbreve til alle, der har tilmeldt sig. Så kan du følge med i den fortsatte omdannelse af Udsigten.</p>
+      <p>Sikken dag! Mere end <strong class="event-highlight">500</strong> begejstrede gæster fyldte Udsigten til Arkitekturens Dag d. 5. oktober 2026.</p>
+      <p>Stemningen var helt i top fra første minut. Tak for den fantastiske opbakning.</p>
+      <p>Dagen forløb i skøn ro og orden, selv med det kæmpe fremmøde.</p>
+      <p>Vi glæder os til at tage jer med videre. Snart sender vi nyhedsbreve til alle, der har tilmeldt sig, så I kan følge den fortsatte omdannelse af Udsigten helt tæt på.</p>
     </div>
-    <img src="images/arkitekturens-dag-cover.jpg" alt="Fremmødte til Arkitekturens Dag, Udsigten Haderslev" class="event-cover-img" loading="lazy">
+    <div class="event-foldout">
+      <video class="event-video" controls preload="metadata" playsinline poster="images/arkitekturens-dag-video-poster.jpg">
+        <source src="images/arkitekturens-dag-video.mp4" type="video/mp4">
+      </video>
 
-    <details class="event-foldout">
-      <summary>Se flere billeder</summary>
-      <div class="event-foldout-content">
+      <div class="event-cover">
+        <img src="images/arkitekturens-dag-cover.jpg" alt="Fremmødte til Arkitekturens Dag, Udsigten Haderslev" class="event-cover-img" loading="lazy">
+        <button type="button" class="event-foldout-toggle event-cover-toggle">Se flere billeder</button>
+      </div>
+
+      <div class="event-foldout-content" hidden>
         <div class="event-gallery">
           <img src="images/arkitekturens-dag-01.jpg" alt="Rundvisning på Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
           <img src="images/arkitekturens-dag-02.jpg" alt="Besøgende til Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
@@ -85,7 +91,7 @@
         </div>
         <button type="button" class="event-foldout-close">Se mindre</button>
       </div>
-    </details>
+    </div>
   </div>
 </section>
 
@@ -397,14 +403,37 @@ const observer = new IntersectionObserver(entries => {
 }, {threshold: 0.08});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Arkitekturens Dag: luk-knap i hvert fold-ud ("Se flere billeder" / "Læs mere")
+// Arkitekturens Dag: fold-ud-knap ("Se flere billeder")
 document.querySelectorAll('.event-foldout').forEach(foldout => {
+  const toggleBtn = foldout.querySelector('.event-foldout-toggle');
   const closeBtn = foldout.querySelector('.event-foldout-close');
-  if (!closeBtn) return;
-  closeBtn.addEventListener('click', () => {
-    foldout.open = false;
-    foldout.scrollIntoView({behavior: 'smooth', block: 'start'});
+  const content = foldout.querySelector('.event-foldout-content');
+  const video = foldout.querySelector('.event-video');
+
+  function open() {
+    foldout.classList.add('is-open');
+    content.hidden = false;
+    toggleBtn.setAttribute('aria-expanded', 'true');
+  }
+
+  function close() {
+    foldout.classList.remove('is-open');
+    content.hidden = true;
+    toggleBtn.setAttribute('aria-expanded', 'false');
+    if (video) video.pause();
+  }
+
+  toggleBtn.setAttribute('aria-expanded', 'false');
+  toggleBtn.addEventListener('click', () => {
+    foldout.classList.contains('is-open') ? close() : open();
   });
+
+  if (closeBtn) {
+    closeBtn.addEventListener('click', () => {
+      close();
+      foldout.scrollIntoView({behavior: 'smooth', block: 'start'});
+    });
+  }
 });
 
 // Hero tilmeldingsfelt: dynamisk placeholder + send-ikon ved gyldig e-mail
