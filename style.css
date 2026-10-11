@@ -1045,6 +1045,18 @@ p {
 }
 
 @media (max-width: 768px) {
+  /* Cover-billedet er et bredt, lavt panorama — på mobil er der for lidt
+     højde til at knappen kan ligge ovenpå uden at dække billedet. Den
+     lægges derfor under billedet i stedet for, som en almindelig fuldbred knap. */
+  .event-cover-toggle {
+    position: static;
+    display: block;
+    width: 100%;
+    margin-top: 16px;
+    text-align: center;
+    box-shadow: none;
+  }
+
   .header-inner .logo-img {
     height: 28px;
   }
