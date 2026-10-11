@@ -1000,7 +1000,10 @@ p {
   .vision-grid,
   .split,
   .status-grid,
-  .kontakt-grid,
+  .kontakt-grid {
+    grid-template-columns: 1fr;
+  }
+
   .vision-image {
     min-height: 360px;
     order: -1;
