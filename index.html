@@ -10,12 +10,6 @@
 </head>
 <body>
 
-<!-- EVENT BANNER: Arkitekturens Dag — midlertidig, fjern efter 2026-10-05 (se docs/DECISIONS.md) -->
-<a href="#event" class="event-banner" id="eventBanner">
-  <span class="event-banner-text">🏛 Åbent Hus — Arkitekturens Dag · Mandag d. 5. oktober, kl. 16.30–18.00</span>
-  <span class="event-banner-cta">Læs mere ↓</span>
-</a>
-
 <!-- NAV -->
 <header class="site-header" id="header">
   <div class="container header-inner">
@@ -68,15 +62,30 @@
   <p class="hero-signup-disclaimer">Din e-mail bruges kun til at kontakte dig om Udsigten Haderslev.</p>
 </section>
 
-<!-- EVENT: ÅBENT HUS — ARKITEKTURENS DAG — midlertidig, fjern efter 2026-10-05 (se docs/DECISIONS.md) -->
+<!-- ARKITEKTURENS DAG — opsummering efter afholdt arrangement (se docs/DECISIONS.md) -->
 <section class="section event-section" id="event">
   <div class="container">
-    <div class="section-block event-full">
-      <h2>ÅBENT HUS<br>ARKITEKTURENS DAG</h2>
-      <p class="event-date">Mandag den 5. oktober 2026 · kl. 16.30–18.00</p>
-      <p>Vær med når vi åbner dørene til Sengetårnet i det tidligere sygehus i Haderslev og viser projektet frem.</p>
-      <p class="event-highlight">Tilmeldingen er nu <span class="event-underline">lukket</span>.<br>Vi er meget glade for, at<br>mere end <span class="event-count">500</span><br>har tilmeldt sig arrangementet.</p>
-      <p>Herover på siden kan du skrive dig op til vores nyhedsbrev og få mere information om arrangementet.</p>    </div>
+    <div class="section-block">
+      <h2>ARKITEKTURENS DAG PÅ UDSIGTEN BLEV ET KÆMPE TILLØBSTYKKE</h2>
+      <p>Mere end 500 interesserede deltog i Arkitekturens Dag på Udsigten.</p>
+      <p>Tak for den store opbakning og den gode stemning.</p>
+      <p>Dagen forløb i god ro og orden, på trods af den store interesse.</p>
+      <p>Vi sender fremover nyhedsbreve til alle, der har tilmeldt sig. Så kan du følge med i den fortsatte omdannelse af Udsigten.</p>
+    </div>
+    <img src="images/arkitekturens-dag-cover.jpg" alt="Fremmødte til Arkitekturens Dag, Udsigten Haderslev" class="event-cover-img" loading="lazy">
+
+    <details class="event-foldout">
+      <summary>Se flere billeder</summary>
+      <div class="event-foldout-content">
+        <div class="event-gallery">
+          <img src="images/arkitekturens-dag-01.jpg" alt="Rundvisning på Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
+          <img src="images/arkitekturens-dag-02.jpg" alt="Besøgende til Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
+          <img src="images/arkitekturens-dag-03.jpg" alt="Besøgende til Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
+          <img src="images/arkitekturens-dag-04.jpg" alt="Besøgende til Arkitekturens Dag, Udsigten Haderslev" loading="lazy">
+        </div>
+        <button type="button" class="event-foldout-close">Se mindre</button>
+      </div>
+    </details>
   </div>
 </section>
 
@@ -388,13 +397,14 @@ const observer = new IntersectionObserver(entries => {
 }, {threshold: 0.08});
 document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-// Event-banner: viser/skjuler Åbent Hus-boksen (midlertidig)
-const eventBanner = document.getElementById('eventBanner');
-const eventBox = document.querySelector('.event-full');
-eventBanner.addEventListener('click', e => {
-  e.preventDefault();
-  const isOpen = eventBox.classList.toggle('is-open');
-  if (isOpen) eventBox.scrollIntoView({behavior: 'smooth', block: 'center'});
+// Arkitekturens Dag: luk-knap i hvert fold-ud ("Se flere billeder" / "Læs mere")
+document.querySelectorAll('.event-foldout').forEach(foldout => {
+  const closeBtn = foldout.querySelector('.event-foldout-close');
+  if (!closeBtn) return;
+  closeBtn.addEventListener('click', () => {
+    foldout.open = false;
+    foldout.scrollIntoView({behavior: 'smooth', block: 'start'});
+  });
 });
 
 // Hero tilmeldingsfelt: dynamisk placeholder + send-ikon ved gyldig e-mail

@@ -32,12 +32,12 @@ Følgende illustrationer findes i `Udsigten_Haderslev_2404 (2).pdf` men er ikke 
 - [ ] Ingen 404-side eller fejlhåndtering testet
 - [ ] `zaxis.dk/udsigten02` er ikke længere deploy-target (se DECISIONS.md #46) og er frosset siden 2026-08-26 — afklar med kunden om den gamle undermappe skal have en redirect til `udsigten.dk`, eller bare efterlades
 
-## Event-banner (Arkitekturens Dag) — FJERN EFTER 2026-10-05
+## Arkitekturens Dag — opfølgning
 
-- [ ] Fjern `.event-banner`-elementet og event-sektionen (`#event`) fra `index.html`
-- [ ] Fjern `.event-banner`, `.event-banner-cta`, `.event-grid`, `.event-info`, `.event-date`, `.event-signup-disclaimer` og `--banner-height`-referencerne fra `style.css` (både `:root` og mobil-medieforespørgslen), og sæt `.site-header`s `top` og `.hero`s `margin` tilbage til faste px-værdier
-- [ ] Fjern/arkivér `event-subscribe.php` og `eventSignupSubmit()` i `index.html`
+- [x] Fjern `.event-banner`-elementet og `--banner-height`-referencerne, erstat event-sektionen med en fast opsummeringsboks + fold-ud-galleri (se DECISIONS.md punkt 50)
+- [ ] Fjern/arkivér `event-subscribe.php` og den tilhørende `.eventSignupSubmit()`-logik (allerede fjernet fra `index.html` ved punkt 48, men filen ligger stadig i repoet)
 - [ ] Afgør med kunden om `/data/arkitekturens-dag.csv` skal beholdes som arkiv eller slettes
+- [ ] Originalfilerne i `Arkitekturens dag/`-mappen (video-stills + .eml) er kun brugt som kilde til de komprimerede billeder i `images/arkitekturens-dag-0{1-4}.jpg` — afklar med kunden om mappen skal slettes fra repoet eller blive liggende
 
 ## Indhold der mangler endelig godkendelse fra kunden
 

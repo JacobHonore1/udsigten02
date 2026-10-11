@@ -507,3 +507,50 @@ Tilmeldingsformularen i event-sektionen er erstattet af en besked om at der er o
 ## 49. Event-boks skjult til banner-klik, hero-felt skifter til nyheds-tekst
 
 Event-boksen er skjult som standard (`.event-full` `display: none`) og vises/skjules ved klik på topbanneret (`is-open`-klasse). Kun højdepunkt-sætningen er centreret; resten står venstrestillet. Understregning kun på "lukket" og "500". Hero-feltets placeholder er ændret fra "Bliv skrevet op til en bolig!" til "Modtag mere info og nyheder!".
+
+## 50. Arkitekturens Dag — fuld revision efter afholdt arrangement: banner fjernet, fast opsummeringsboks + fold-ud-galleri
+
+Arrangementet er nu afholdt (mandag d. 5. oktober 2026). Kunden bad om at erstatte hele banner/tilmeldings-flowet (punkt 47-49) med en permanent opsummering af, hvordan dagen gik — ikke længere en kommende begivenhed, men et tilbageblik.
+
+- **Topbanner fjernet helt:** `.event-banner`-elementet (`index.html`) og al tilhørende CSS (`.event-banner`, `.event-banner-cta`) samt JS-klik-toggle er slettet. `--banner-height`-variablen (brugt til at skubbe `.site-header` og `.hero` ned under banneret, både desktop `44px` og mobil `68px`) er fjernet fra `:root` og mobil-medieforespørgslen. `.site-header`s `top` er tilbage til `0`, og `.hero`s `margin-top`-calc er tilbage til faste `76px`/`56px` uden banner-addition.
+- **Ny fast boks under hero (`#event`):** genbruger det eksisterende `.section-block`-mønster (8px `border-left: var(--accent)`, ingen kategorifarve — jf. CLAUDE.md's regel om at generelle sektioner uden kategori beholder `#8B5E3C`). Overskrift "ARKITEKTURENS DAG" + én kort sætning: "Mere end 500 interesserede deltog i Arkitekturens Dag på Udsigten. Tak for den store tilslutning og positive stemning." Altid synlig, intet klik nødvendigt.
+- **Fold-ud med billeder:** implementeret som semantisk `<details>/<summary>` (`.event-foldout`) i stedet for den tidligere JS-drevne `is-open`-klasse — ingen JS nødvendig, fungerer nativt med tastatur/skærmlæser. `summary` er styled uden standard-markør (`::-webkit-details-marker: none`), med en `↓`-pil der roterer 180° ved `[open]`. Indholdet rummer en uddybende tak-tekst (positiv stemning på trods af den ekstremt store interesse, tak til Home og de frivillige der hjalp med at arrangere dagen — indhold hentet fra kundens videresendte mailtråd i `Arkitekturens dag/Populært Arrangement i dag !!.eml`) samt et billedgalleri.
+- **Billeder:** 4 stillbilleder fra dagen (`Arkitekturens dag/569A9573.*`, 1920×1080 original) er skaleret ned til 1600px bredde og komprimeret til JPEG kvalitet 82 via PowerShell/`System.Drawing` (ImageMagick er ikke installeret — `convert` på denne maskine er Windows' indbyggede disk-konverteringsværktøj, ikke ImageMagick, så det må aldrig bruges til billeder). Gemt som `images/arkitekturens-dag-01.jpg` til `-04.jpg` (180-395KB hver). Galleriet genbruger den eksisterende `.gallery-grid`/`.gallery-item`-klasse fra Boliger-sektionen (3 kolonner desktop, samme responsive breakpoints) i stedet for at opfinde et nyt mønster — ingen ny CSS for selve grid'et, kun `.event-foldout-content .gallery-grid { max-width: none }` for at løfte galleriet ud af fold-ud-tekstens `max-width: 680px`.
+- **Ikke ændret:** `event-subscribe.php` er ikke slettet (se opdateret `docs/TODO.md` — afventer kundens afklaring).
+
+**Status: implementeret, endnu ikke committet/pushet — afventer visuel godkendelse fra kunden via lokal preview, da deploy går direkte til produktion uden staging-trin (jf. CLAUDE.md).**
+
+**Opfølgende rettelser (samme dag, efter første preview):**
+- Ingen bindestreger/tankestreger i brødtekst — den tidligere "—" i fold-ud-teksten er fjernet, teksten er i stedet delt i tre separate `<p>`-afsnit (linjeskift/afsnit i stedet for sammenhængende sætning med tankestreg).
+- Nyt afsnit tilføjet i den altid-synlige boks: "Vi kommer fremover til at sende nyhedsbreve ud til alle, så man kan følge med i den fortsatte omdannelse af Udsigten." — kobler tilbage til hero-tilmeldingsfeltet.
+- Fold-ud har nu en synlig "Luk"-knap (genbruger `.btn`) nederst i `.event-foldout-content`, ud over pilen i `summary`. JS sætter `eventFoldout.open = false` og scroller tilbage til toppen af sektionen ved klik.
+- Et femte billede, `569A9595_cropped.jpg` (bred panorama-crop, original 6621×1333, Home-folkene i røde kedeldragter synlige i højre side), er skaleret til 1800px bredde/JPEG kvalitet 82 og gemt som `images/arkitekturens-dag-cover.jpg` (181KB). Vist som `.event-cover-img` direkte i den synlige boks, før fold-ud'et — `aspect-ratio: 6621/1333` på desktop, skiftet til `16/9` under 768px da det oprindelige panoramaforhold bliver for lavt til at se noget på smalle skærme.
+
+**Endnu en opfølgende runde (samme dag, efter andet preview):**
+- Nyhedsbrev-sætningen præciseret: "...til alle der tilmeldte sig, så..." tilføjet (kun dem der har tilmeldt sig, ikke alle besøgende på siden generelt).
+- `.event-cover-img` har ikke længere `aspect-ratio`/`object-fit` på desktop — kun `width: 100%; height: auto;`, så billedet altid vises i sin fulde bredde uden at blive beskåret i siderne, uanset hvor præcist dets mål måtte afvige fra et hardcodet forhold. Højden følger naturligt billedets eget format (bliver ca. 260-360px ved 1300px content-width, hvilket er forventet og accepteret). Mobil-visningen (under 768px) beskærer fortsat til `16/9` med `object-fit: cover` tilføjet eksplicit (nødvendigt nu da base-reglen ikke længere sætter det).
+- Billedgalleriet (de 4 stillbilleder) er flyttet ud af fold-ud'et og op til at stå direkte under tekstblokken, altid synligt uden klik. Gjort "tydeligere": `.event-gallery` overstyrer den delte `.gallery-grid`/`.gallery-item`-klasse fra Boliger med 2 kolonner (i stedet for 3) og `height: 420px` (i stedet for 360px) på desktop, så hvert billede fylder markant mere. Kollapser stadig til 1 kolonne/280px på mobil (eksplicit `.event-gallery`-override tilføjet i 768px-mediesøgningen for at være uafhængig af CSS-specificitet mod den delte `.gallery-grid`-regel).
+- Fold-ud'et indeholder nu kun den uddybende tak-tekst (ikke længere billederne) — summary-teksten er ændret fra "Se billederne fra dagen" til "Læs mere", da billederne er flyttet ud og altid er synlige.
+- Overskrift ændret fra "ARKITEKTURENS DAG" til "STOR INTERESSE PÅ ARKITEKTURENS DAG!".
+
+**Rewind (samme dag, tredje preview):** kunden fortrød "flyt galleri op"-ændringen. Den altid-synlige boks er nu reduceret til kun: overskrift ("STOR INTERESSE FOR ARKITEKTURENS DAG" — "for" i stedet for "på", udråbstegn fjernet) + den ene korte "mere end 500..."-sætning + panorama-coverbilledet under. Alt andet er lagt bag to separate `<details>`-fold-ud, hver med egen `summary` og egen "Luk"-knap:
+- **"Se flere billeder":** indeholder galleriet af de 4 stillbilleder.
+- **"Læs mere":** indeholder nyhedsbrev-sætningen (flyttet hertil fra den synlige boks) + de tre uddybende tak-afsnit.
+
+JS er omskrevet fra at håndtere ét enkelt fold-ud (`querySelector`, ental) til at iterere over alle `.event-foldout`-elementer med `querySelectorAll`, så hver sektions egen "Luk"-knap kun lukker sin egen `<details>`.
+
+**Billedgalleriet er desuden ændret fra grid til fuld-bredde stak:** kunden ville ikke have billederne i et grid (som Boliger-galleriet), men vist i fuld bredde, et ad gangen, under hinanden. `.event-gallery` er omskrevet fra en `.gallery-grid`/`.gallery-item`-baseret 2-kolonne grid til `display: flex; flex-direction: column; gap: 16px` med rene `<img>`-børn (`width: 100%; height: auto`, ingen `object-fit: cover`-beskæring — samme no-crop-logik som coverbilledet). Da `.event-foldout-content` har `max-width: 680px` for læsbar tekst i "Læs mere"-fold-ud'et, er der tilføjet en modifier-klasse `.event-foldout-content--gallery` (kun på "Se flere billeder"-fold-ud'et) der nulstiller `max-width`, så billederne kan fylde hele sektionens bredde i stedet for at blive klemt ind i tekstspalten.
+
+**Status: implementeret, endnu ikke committet/pushet.**
+
+**Fjerde runde (samme dag, efter fjerde preview):**
+- Overskrift ændret til "ARKITEKTURENS DAG PÅ UDSIGTEN BLEV ET KÆMPE TILLØBSTYKKE" (store bogstaver, samme konvention som sitets øvrige h2'er).
+- "Læs mere"-fold-ud'et er fjernet helt. Al tekst (inklusiv nyhedsbrev-sætningen) står nu synligt direkte under overskriften som fire korte, selvstændige afsnit — omformuleret til kortere sætninger uden bindestreger, og omtalen af frivillige/Home er fjernet.
+- Ny regel `.event-section .section-block p + p { margin-top: 12px; }` tilføjet — uden den ville de fire `<p>`-afsnit ligge klistret sammen uden synligt linjeskift, da sitets globale reset nulstiller al margin.
+- Kun "Se flere billeder"-fold-ud'et (billedgalleriet) er tilbage. Modifier-klassen `.event-foldout-content--gallery` er fjernet igen — med kun én fold-ud-type tilbage er `max-width: 680px` fjernet direkte fra den fælles `.event-foldout-content`-regel i stedet for at overstyres.
+
+**Femte runde (samme dag, efter femte preview):**
+- `.event-cover-img`s mobil-beskæring (`aspect-ratio: 16/9; object-fit: cover` under 768px) er fjernet helt. Billedet vises nu identisk på alle skærmstørrelser: `width: 100%; height: auto`, ingen beskæring i hverken bredde eller højde — højden følger simpelthen billedets eget 6621:1333-format og bliver dermed relativt lav, hvilket er tilsigtet.
+- Luk-knappen i billedgalleriet er ikke længere en udfyldt `.btn`-knap, men en ren tekstlink med samme styling som fold-ud'ets `summary` (farve `var(--accent)`, `font-weight: 600`, `font-size: 0.95rem`, ingen baggrund/kant). Teksten er ændret fra "Luk" til "Se mindre". `.event-foldout summary` og `.event-foldout-close` deler nu deres fælles tekst-styling i én CSS-regel.
+
+**Status: implementeret, endnu ikke committet/pushet.**

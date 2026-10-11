@@ -29,7 +29,6 @@
   --content-width: 1300px;
   --gutter:    clamp(24px, 4vw, 60px);
   --section-pad: clamp(16px, 2.5vw, 30px);
-  --banner-height: 44px; /* Event-banner (Arkitekturens Dag), fjern var sammen med .event-banner efter 2026-10-05 */
 }
 
 /* ========== BASE ========== */
@@ -154,38 +153,10 @@ p {
   border-color: #fff;
 }
 
-/* ========== EVENT BANNER (Arkitekturens Dag) — midlertidig, fjern hele blokken + HTML efter 2026-10-05 ========== */
-.event-banner {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 4px 12px;
-  background: var(--accent);
-  color: #fff;
-  text-align: center;
-  padding: 10px var(--gutter);
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85rem;
-  line-height: 1.3;
-}
-
-.event-banner-cta {
-  font-weight: 700;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  white-space: nowrap;
-}
-
 /* ========== NAV ========== */
 .site-header {
   position: fixed;
-  top: var(--banner-height);
+  top: 0;
   left: 0;
   width: 100%;
   z-index: 999;
@@ -283,7 +254,7 @@ p {
 .hero {
   position: relative;
   max-width: var(--content-width);
-  margin: calc(76px + var(--banner-height)) auto 0; /* clears fixed header (12px top-padding + 48px logo + 12px bottom-padding = 72px) + 4px buffer + event-banner */
+  margin: 76px auto 0; /* clears fixed header (12px top-padding + 48px logo + 12px bottom-padding = 72px) + 4px buffer */
   padding: 0 var(--gutter);
 }
 
@@ -523,37 +494,74 @@ p {
   margin-bottom: 8px;
 }
 
-/* ========== EVENT (Arkitekturens Dag) — midlertidig, fjern efter 2026-10-05 ========== */
-.event-full {
-  display: none;
+/* ========== EVENT (Arkitekturens Dag) ========== */
+.event-section .section-block p + p {
+  margin-top: 12px;
 }
 
-.event-full.is-open { display: block; }
+.event-gallery {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 24px;
+}
 
-.event-full p { margin-top: 18px; }
+.event-gallery img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
 
-.event-date {
+.event-cover-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
+.event-foldout {
+  margin-top: 32px;
+  padding-left: 24px;
+}
+
+.event-foldout summary,
+.event-foldout-close {
+  cursor: pointer;
   font-weight: 600;
-  color: var(--text);
-}
-
-.event-highlight {
-  font-size: 1.2rem;
-  line-height: 1.5;
-  text-align: center;
-}
-
-.event-underline,
-.event-count {
-  font-weight: 700;
-  text-decoration: underline;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 4px;
-}
-
-.event-count {
-  font-size: 1.6rem;
   color: var(--accent);
+  font-size: 0.95rem;
+}
+
+.event-foldout summary {
+  list-style: none;
+}
+
+.event-foldout-close {
+  display: block;
+  margin-top: 24px;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+}
+
+.event-foldout summary::-webkit-details-marker { display: none; }
+
+.event-foldout summary::after {
+  content: '↓';
+  display: inline-block;
+  margin-left: 6px;
+  transition: transform 0.2s ease;
+}
+
+.event-foldout[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.event-foldout-content {
+  margin-top: 18px;
 }
 
 /* ========== VISION ========== */
@@ -1010,10 +1018,6 @@ p {
 }
 
 @media (max-width: 768px) {
-  :root {
-    --banner-height: 68px; /* event-banner-tekst ombrydes til 2 linjer på mobil */
-  }
-
   .header-inner .logo-img {
     height: 28px;
   }
@@ -1023,7 +1027,7 @@ p {
   }
 
   .hero {
-    margin: calc(56px + var(--banner-height)) auto 0; /* clears fixed mobile header (12px top-padding + 28px logo + 12px bottom-padding = 52px) + 4px buffer + event-banner */
+    margin: 56px auto 0; /* clears fixed mobile header (12px top-padding + 28px logo + 12px bottom-padding = 52px) + 4px buffer */
   }
 
   .hero-content {
